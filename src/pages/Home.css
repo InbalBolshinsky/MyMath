@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Joti+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crafty+Girls&family=Joti+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&family=Kirang+Haerang&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&family=Kirang+Haerang&family=Love+Ya+Like+A+Sister&display=swap');
+
+.home-container{
+ background-color: rgb(230, 230, 173);
+}
+
+.my-math{
+  font-size: 100px;
+  color: hsl(295, 40%, 62%);
+  padding: 14px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+  font-family: "Chelsea Market", system-ui;
+  font-weight: 1000;
+}
+
+.welcome-msg{
+    
+  font-size: 50px;
+  color: hsl(295, 52%, 36%);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+    
+  
+  font-family: "Chelsea Market", system-ui;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.to-exercise{
+  background-color:hsl(295, 40%, 62%);
+  font-size: 20px;
+  color: white;
+  padding: 14px 25px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+.to-exersice:hover{
+  background-color: white;
+  color:hsl(295, 40%, 62%);
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+
+
+  

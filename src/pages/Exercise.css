@@ -1,0 +1,108 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Joti+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crafty+Girls&family=Joti+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&display=swap');
+
+body{
+  background-color: rgb(39,76,67);
+}
+
+.exercise-btn{
+    background-color: transparent;
+    color: white;
+    padding: 15px 30px;
+    font-size: 75px;    
+    width: 350px;       
+    height: 170px; 
+    border: 3px solid rgb(39,76,67);
+  
+    display: flex;
+    justify-content: center;  
+    align-items: center;        
+  
+    font-family: "Love Ya Like A Sister", cursive;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+
+.back-link{
+
+  background-color: hsl(295, 40%, 62%);
+  color: white;
+  padding: 14px 25px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+  
+.back-link:hover{
+  background-color: white;
+  color:hsl(295, 40%, 62%);
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.whats-your-answer{
+  background-color: transparent;
+  color: white;
+  padding: 15px 30px;
+  font-size: 40px;    
+ 
+  display: flex;
+  justify-content: center;  
+  align-items: center;        
+
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.check-answer{
+ 
+  background-color: hsl(295, 40%, 62%);
+  color: white;
+  padding: 14px 25px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.check-answer:hover{
+  background-color: white;
+  color:hsl(295, 40%, 62%);
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.solution-msg{
+  background-color: transparent;
+  color: white;
+  padding: 15px 30px;
+  font-size: 50px;    
+
+  display: flex;
+  justify-content: center;  
+  align-items: center;        
+
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
