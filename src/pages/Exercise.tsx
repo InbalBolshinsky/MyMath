@@ -80,7 +80,8 @@ export const Exercise = () => {
 
       {/* Display result */}
       {isCorrect !== null && (
-        <p className="solution-msg">{isCorrect ? 'Well Done!' : `Incorrect. The correct answer is ${correctAnswer}`}</p>
+        <p className="solution-msg">{isCorrect ? 'Well Done!' : `Incorrect answer.
+           The correct answer is ${correctAnswer}`}</p>
       )}
 
       <Link to="/" className="back-link">Go Back</Link>
