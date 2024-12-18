@@ -26,31 +26,6 @@ body{
     
 }
 
-.back-link{
-
-  background-color: hsl(295, 40%, 62%);
-  color: white;
-  padding: 14px 25px;
-  text-align: right;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 10px;
-  
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 20px;
-}
-  
-.back-link:hover{
-  background-color: white;
-  color:hsl(295, 40%, 62%);
-  
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
 .whats-your-answer{
   background-color: transparent;
   color: white;
@@ -66,14 +41,30 @@ body{
   font-style: normal;
 }
 
+#answer{
+  background-color: white(295, 40%, 62%);
+  color: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 25px;
+  text-align: left;
+  border-radius: 10px;
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
 .check-answer{
- 
   background-color: hsl(295, 40%, 62%);
   color: white;
-  padding: 14px 25px;
-  text-align: right;
-  text-decoration: none;
-  display: inline-block;
+
+  margin: auto;
+  width: 30%;
+  padding: 10px;
   border-radius: 10px;
   
   font-family: "Love Ya Like A Sister", cursive;
@@ -83,6 +74,34 @@ body{
 }
 
 .check-answer:hover{
+  background-color: white;
+  color:hsl(295, 40%, 62%);
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.back-link{
+
+  background-color: hsl(295, 40%, 62%);
+  color: white;
+  
+  margin: auto;
+  width: 30%;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 10px;
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+  
+.back-link:hover{
   background-color: white;
   color:hsl(295, 40%, 62%);
   

@@ -65,10 +65,10 @@ export const Exercise = () => {
 
       {/* Custom prompt input field */}
       <div className="prompt-container">
-        <label className="whats-your-answer" htmlFor="userNameInput">What's your answer?</label>
+        <label className="whats-your-answer" htmlFor="answer">What's your answer?</label>
         <input
           type="text"
-          id="userNameInput"
+          id="answer"
           value={userInputAnswer}
           onChange={handleInputChangeAnswer}
           placeholder="Enter your answer"
