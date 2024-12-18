@@ -1,138 +1,121 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Joti+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Crafty+Girls&family=Joti+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&display=swap');
 
-body{
-  background-color: rgb(39,76,67);
+body {
+  background-color: rgb(39, 76, 67);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center vertically and horizontally */
+  margin: 0;
+  height: 100vh;
 }
 
-.exercise-btn{
-    background-color: transparent;
-    color: white;
-
-    font-size: 100px;    
-    width: 350px;       
-    height: 170px; 
-    border: 3px solid rgb(39,76,67);
-  
-    display: center;
-    justify-content: center;  
-    align-items: center;        
-  
-    font-family: "Love Ya Like A Sister", cursive;
-    font-weight: 400;
-    font-style: normal;
-    
+.exercise-btn {
+  background-color: transparent;
+  color: white;
+  font-size: 100px;
+  width: 350px;
+  height: 170px;
+  border: 3px solid rgb(39, 76, 67);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+  margin-left: 25%; /* Remove top margin */
 }
 
-.whats-your-answer{
+.whats-your-answer {
   background-color: transparent;
   color: white;
   padding: 15px 30px;
-  font-size: 40px; 
-  height: 200px;   
- 
+  font-size: 40px;
   display: flex;
-  justify-content: center;  
-  align-items: center;        
-
+  justify-content: center;
+  align-items: center;
   font-family: "Love Ya Like A Sister", cursive;
   font-weight: 400;
   font-style: normal;
 }
 
-.prompt-container{
-  display: flex;
-  justify-content: right;
-  align-items: right;
-}
-
-#answer{
-  background-color: white(295, 40%, 62%);
-  color: black;
-
+.prompt-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin-top: 20px;
+}
+
+#answer {
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
   width: 400px;
   height: 90px;
-  padding: 10px;
-
-  border-radius: 10px;
-  text-align: left;
   
+  border-radius: 10px;
+  text-align: center;
   font-family: "Love Ya Like A Sister", cursive;
   font-weight: 400;
   font-style: normal;
   font-size: 40px;
 }
 
-.check-answer{
+.check-answer {
   background-color: hsl(295, 40%, 62%);
   color: white;
-
-  margin: auto;
   width: 200px;
+  height: 80px;
   padding: 10px;
   text-align: center;
   border-radius: 10px;
-  padding: 20px;
-  
   font-family: "Love Ya Like A Sister", cursive;
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
+  margin: 20px 10px; /* Space between buttons */
 }
 
-.check-answer:hover{
+.check-answer:hover {
   background-color: white;
-  color:hsl(295, 40%, 62%);
-  
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
+  color: hsl(295, 40%, 62%);
 }
 
-.back-link{
+.back-link {
   background-color: hsl(295, 40%, 62%);
   color: white;
-  
-  margin: auto;
   width: 400px;
+  height: 90px;
   padding: 10px;
   text-align: center;
   border-radius: 10px;
-  padding: 20px;
-  
   font-family: "Love Ya Like A Sister", cursive;
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
-}
-  
-.back-link:hover{
-  background-color: white;
-  color:hsl(295, 40%, 62%);
-  
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
+  margin: 20px 10px; /* Space between buttons */
 }
 
-.solution-msg{
+.back-link:hover {
+  background-color: white;
+  color: hsl(295, 40%, 62%);
+}
+
+.solution-msg {
   background-color: transparent;
   color: white;
   padding: 15px 30px;
-  font-size: 50px;    
-
+  font-size: 40px;
   display: flex;
-  justify-content: center;  
-  align-items: center;        
-
+  justify-content: center;
+  align-items: center;
   font-family: "Love Ya Like A Sister", cursive;
   font-weight: 400;
   font-style: normal;
+  margin-top: 30px;
 }
-
