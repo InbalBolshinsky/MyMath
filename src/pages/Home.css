@@ -38,8 +38,11 @@
   background-color:hsl(295, 40%, 62%);
   font-size: 20px;
   color: white;
-  padding: 14px 25px;
-  text-align: right;
+
+  height: 60px;
+  width: 250px;
+  
+  text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 10px;
@@ -59,7 +62,34 @@
   font-style: normal;
 }
 
+.open-login {
+  background-color:hsl(295, 40%, 62%);
+  font-size: 20px;
+  color: white;
+  height: 60px;
+  width: 150px;
+ 
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+  border-color: transparent;
+  margin-right: 5px;
 
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+.open-login-hover {
+  background-color: white;
+  color:hsl(295, 40%, 62%);
+  
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 
 
 
