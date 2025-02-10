@@ -13,6 +13,7 @@ export const Exercise = () => {
   const [userInputAnswer, setUserInputAnswer] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState<number | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   function generateExercise() {
     const randomIndex = Math.floor(Math.random() * activityArr.length);
@@ -29,6 +30,7 @@ export const Exercise = () => {
     const correctAns = calcSolution(first_num, second_num, activityArr[randomIndex]);
     setCorrectAnswer(correctAns);
     setIsCorrect(null); // Reset correctness when a new exercise is generated
+    setErrorMessage(null); // Clear any previous error message
   }
 
   function calcSolution(first_num: number, second_num: number, activity: string) {
@@ -52,8 +54,12 @@ export const Exercise = () => {
 
   const checkAnswer = () => {
     const userAnswer = parseFloat(userInputAnswer);
-    if (!isNaN(userAnswer) && correctAnswer !== null) {
+    if (isNaN(userAnswer)) {
+      setErrorMessage("Your answer should be a number.");
+      setIsCorrect(null);
+    } else if (correctAnswer !== null) {
       setIsCorrect(userAnswer === correctAnswer);
+      setErrorMessage(null);
     }
   };
 
@@ -87,6 +93,7 @@ export const Exercise = () => {
       
       <Link to="/" className="back-link">Go Back</Link>
 
+      {errorMessage && <p className="error-msg">{errorMessage}</p>}
       {isCorrect !== null && (
         <p className="solution-msg">{isCorrect ? 'Well Done!' : `Incorrect answer. The correct answer is ${correctAnswer}`}</p>
       )}
