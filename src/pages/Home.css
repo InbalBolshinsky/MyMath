@@ -1,96 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Joti+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Crafty+Girls&family=Joti+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&family=Kirang+Haerang&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&family=Kirang+Haerang&family=Love+Ya+Like+A+Sister&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
 
-.home-container{
- background-color: rgb(230, 230, 173);
+body {
+    font-family: 'Gloria Hallelujah', cursive;
+    text-align: center;
+    background-color: #FFF5D1; /* Softer pastel yellow */
+    color: #333;
+    letter-spacing: 1px;
 }
 
-.my-math{
-  font-size: 100px;
-  color: hsl(295, 40%, 62%);
-  padding: 14px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-
-  font-family: "Chelsea Market", system-ui;
-  font-weight: 1000;
+.home-container {
+    margin-top: 50px;
 }
 
-.welcome-msg{
-    
-  font-size: 50px;
-  color: hsl(295, 52%, 36%);
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-    
-  
-  font-family: "Chelsea Market", system-ui;
-  font-weight: 200;
-  font-style: normal;
+.my-math {
+    font-size: 75px;
+    letter-spacing: 4px;
+    font-family: 'Chewy', cursive; /* Chewy font for headlines */
+    color: #E98AA1; /* Soft pink */
+    text-shadow: 2px 2px 5px rgba(233, 138, 161, 0.5);
 }
 
-.to-exercise{
-  background-color:hsl(295, 40%, 62%);
-  font-size: 20px;
-  color: white;
-
-  height: 60px;
-  width: 250px;
-  
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 10px;
-
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-
+.welcome-msg {
+    font-size: 34px;
+    font-family: 'Chewy', cursive; /* Chewy for headings */
+    color: #76AADB; /* Soft blue */
 }
 
-.to-exersice:hover{
-  background-color: white;
-  color:hsl(295, 40%, 62%);
-  
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
+.open-login, .to-exercise, button {
+    background-color: #F4C2C2; /* Muted pink */
+    font-family: 'Chewy', cursive;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.open-login {
-  background-color:hsl(295, 40%, 62%);
-  font-size: 20px;
-  color: white;
-  height: 60px;
-  width: 150px;
- 
-  text-align: right;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 10px;
-  border-color: transparent;
-  margin-right: 5px;
-
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-
+.open-login:hover, .to-exercise:hover, button:hover {
+    background-color: #E89E9E;
+    transform: scale(1.05);
 }
 
-.open-login-hover {
-  background-color: white;
-  color:hsl(295, 40%, 62%);
-  
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
+.to-exercise {
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    font-weight: bold;
 }
 
+.popup {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    margin: 100px auto;
+    text-align: center;
+}
 
-  
+.popup-content input {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    border: 1px solid #76AADB;
+}
+
+.close {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}

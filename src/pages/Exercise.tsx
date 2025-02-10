@@ -59,22 +59,19 @@ export const Exercise = () => {
 
   return (
     <div className="exercise-container">
-     <button
-      className="exercise-btn"
-      onClick={generateExercise}
-      style={{
-      fontSize:
-        exercise.first_num === 0 && exercise.second_num === 0 ? "40px" : "100px",
-  }}
->
-  {exercise.first_num === 0 && exercise.second_num === 0
-    ? "Click here to start"
-    : `${exercise.first_num} ${exercise.activity} ${exercise.second_num}`}
-</button>
+      <button
+        className="exercise-btn"
+        onClick={generateExercise}
+        style={{
+          fontSize:
+            exercise.first_num === 0 && exercise.second_num === 0 ? "40px" : "100px",
+        }}
+      >
+        {exercise.first_num === 0 && exercise.second_num === 0
+          ? "Click here to start"
+          : `${exercise.first_num} ${exercise.activity} ${exercise.second_num}`}
+      </button>
 
-
-
-      {/* Custom prompt input field */}
       <div className="prompt-container">
         <label className="whats-your-answer" htmlFor="answer">What's your answer?</label>
         <input
@@ -86,15 +83,12 @@ export const Exercise = () => {
         />
       </div>
 
-      {/* Button to check answer */}
       <button className="check-answer" onClick={checkAnswer}>Check Answer</button>
       
       <Link to="/" className="back-link">Go Back</Link>
 
-      {/* Display result */}
       {isCorrect !== null && (
-        <p className="solution-msg">{isCorrect ? 'Well Done!' : `Incorrect answer.
-           The correct answer is ${correctAnswer}`}</p>
+        <p className="solution-msg">{isCorrect ? 'Well Done!' : `Incorrect answer. The correct answer is ${correctAnswer}`}</p>
       )}
     </div>
   );

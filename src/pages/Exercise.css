@@ -1,121 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Joti+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Crafty+Girls&family=Joti+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Crafty+Girls&family=Joti+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
 
 body {
-  background-color: rgb(39, 76, 67);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* Center vertically and horizontally */
-  margin: 0;
-  height: 100vh;
+    font-family: 'Gloria Hallelujah', cursive;
+    text-align: center;
+    background-color: #FFF5D1; /* Softer pastel yellow */
+    color: #333;
+}
+
+.exercise-container {
+    margin-top: 50px;
 }
 
 .exercise-btn {
-  background-color: transparent;
-  color: white;
-  font-size: 100px;
-  width: 350px;
-  height: 170px;
-  border: 3px solid rgb(39, 76, 67);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-  margin-left: 25%; /* Remove top margin */
+    background-color: #E98AA1; /* Soft pink */
+    border: none;
+    padding: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 20px;
+    font-family: 'Gloria Hallelujah', cursive; /* Exercise text in Gloria Hallelujah */
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.whats-your-answer {
-  background-color: transparent;
-  color: white;
-  padding: 15px 30px;
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
+.exercise-btn:hover {
+    background-color: #E89E9E;
+    transform: scale(1.05);
 }
 
 .prompt-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+    margin: 20px;
 }
 
-#answer {
-  background-color: white;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px auto;
-  width: 400px;
-  height: 90px;
-  
-  border-radius: 10px;
-  text-align: center;
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 40px;
+.whats-your-answer {
+    font-size: 24px;
+    letter-spacing: 1px;
+    font-family: 'Chewy', cursive; /* Chewy for questions */
+    color: #76AADB; /* Soft blue */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'Gloria Hallelujah', cursive;
+    border-radius: 10px;
+    border: 2px solid #76AADB;
+    text-align: center;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: #E98AA1;
 }
 
 .check-answer {
-  background-color: hsl(295, 40%, 62%);
-  color: white;
-  width: 200px;
-  height: 80px;
-  padding: 10px;
-  text-align: center;
-  border-radius: 10px;
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 20px;
-  margin: 20px 10px; /* Space between buttons */
+    background-color: #AFCDE7;
+    border: none;
+    padding: 10px 20px;
+    font-size: 24px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .check-answer:hover {
-  background-color: white;
-  color: hsl(295, 40%, 62%);
-}
-
-.back-link {
-  background-color: hsl(295, 40%, 62%);
-  color: white;
-  width: 400px;
-  height: 90px;
-  padding: 10px;
-  text-align: center;
-  border-radius: 10px;
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 20px;
-  margin: 20px 10px; /* Space between buttons */
-}
-
-.back-link:hover {
-  background-color: white;
-  color: hsl(295, 40%, 62%);
+    background-color: #92B3D8;
+    transform: scale(1.05);
 }
 
 .solution-msg {
-  background-color: transparent;
-  color: white;
-  padding: 15px 30px;
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Love Ya Like A Sister", cursive;
-  font-weight: 400;
-  font-style: normal;
-  margin-top: 30px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #008000; /* Green for correct */
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 24px;
+    font-family: 'Chewy', cursor;
+    letter-spacing: 1px;
+    text-decoration: none;
+    background-color: #AFCDE7; /* Soft blue */
+    color: whitesmoke;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.back-link:hover {
+    background-color: #92B3D8;
 }
