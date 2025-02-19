@@ -1,3 +1,12 @@
+
+
+.popup-modal div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .popup-overlay {
   text-align: center;
   position: fixed;
@@ -18,29 +27,38 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 320px; 
   text-align: center;
+  position: relative;
+}
+
+.login-header, .signup-header {
+  font-size: 34px;
+    font-family: 'Chewy', cursive; 
+    color: #76AADB;
+    margin-top: 5px;
 }
 
 .popup-modal label {
-  display: block; 
+  position: relative;
+  display: block;
   text-align: center;
   font-size: 18px;
-  margin-bottom: 5px; 
-  font-weight: bold; 
+  margin-bottom: 5px;
+  font-weight: bold;
+  width: 100%;
 }
 
-
 .popup-modal input {
-  width: 90% !important;
+  width: 80%;
   padding: 10px;
   margin: 5px 0;
   border-radius: 5px;
   border: 2px solid #76AADB;
   font-size: 18px;
-  box-sizing: border-box;
-  display: block;
   text-align: center;
-  align-items: center ;
+  display: block;
+  box-sizing: border-box;
 }
+
 
 .popup-modal input[type="text"],
 .popup-modal input[type="password"] {

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import'./SignupForm.css'
+import "./LoginForm.css"; 
 
-interface SignupFormProps {
-    onSubmit: (userName: string, password: string) => void;
-    isOpen: boolean;
-    onClose: () => void;
-  }
+interface SignUpFormProps {
+  onSubmit: (userName: string, password: string) => void;
+  onBack: () => void; 
+}
 
-export const SignupForm: React.FC<SignupFormProps>  = ({ onSubmit, isOpen, onClose }) => {
+export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, onBack }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,15 +15,12 @@ export const SignupForm: React.FC<SignupFormProps>  = ({ onSubmit, isOpen, onClo
     onSubmit(userName, password);
   }
 
-  if (!isOpen) return null; 
-
   return (
     <div className="popup-overlay">
       <div className="popup-modal">
-        <button className="popup-close-button" onClick={onClose}>
-          ✖
-        </button>
+        <button className="popup-close-button" onClick={onBack}>✖</button>
         <form onSubmit={handleSubmit}>
+          <h2 className="signup-header">Sign Up</h2>
           <div>
             <label htmlFor="userName">Username:</label>
             <input
@@ -45,18 +41,10 @@ export const SignupForm: React.FC<SignupFormProps>  = ({ onSubmit, isOpen, onClo
               required
             />
           </div>
-          <button type="submit">Login</button>
-          <button
-            type="button"
-            onClick={() =>
-              alert("Is it your first time in MyMath? Sign Up here!")
-            }
-          >
-            Sign Up
-          </button>
+          <button type="submit">Sign Up</button>
+          <button type="button" onClick={onBack}>Back to Login</button>
         </form>
       </div>
     </div>
   );
 };
-

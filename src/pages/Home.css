@@ -50,3 +50,18 @@ body {
     transform: scale(1.05);
 }
 
+.sticker {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    z-index: 2;
+  }
+  
+  .sticker-top-left { top: 20px; left: 20px; }
+  .sticker-top-right { top: 20px; right: 20px; }
+  .sticker-middle-left { top: 50%; left: 20px; transform: translateY(-50%); }
+  .sticker-middle-right { top: 50%; right: 20px; transform: translateY(-50%); }
+  .sticker-bottom-left { bottom: 20px; left: 20px; }
+  .sticker-bottom-right { bottom: 20px; right: 20px; }
+  
+
