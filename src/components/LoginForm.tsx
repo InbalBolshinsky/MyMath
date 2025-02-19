@@ -16,7 +16,7 @@ export const LoginForm: React.FC<LoginFormProps>  = ({ onSubmit, isOpen, onClose
     onSubmit(userName, password);
   }
 
-  if (!isOpen) return null; // Do not render the modal if it's not open
+  if (!isOpen) return null; 
 
   return (
     <div className="popup-overlay">
