@@ -4,7 +4,7 @@
 body {
     font-family: 'Gloria Hallelujah', cursive;
     text-align: center;
-    background-color: #FFF5D1; /* Softer pastel yellow */
+    background-color: #f0d883;
     color: #333;
     letter-spacing: 1px;
 }
@@ -14,10 +14,11 @@ body {
 }
 
 .my-math {
-    font-size: 75px;
+    font-size: 120px;
     letter-spacing: 4px;
     font-family: 'Chewy', cursive; 
     color: #E98AA1; 
+    margin-bottom: 5px;
     text-shadow: 2px 2px 5px rgba(233, 138, 161, 0.5);
 }
 
@@ -25,6 +26,7 @@ body {
     font-size: 34px;
     font-family: 'Chewy', cursive; 
     color: #76AADB;
+    margin-top: 5px;
 }
 
 .open-login, .to-exercise, button {
@@ -33,11 +35,14 @@ body {
     border: none;
     padding: 10px 20px;
     margin: 10px;
+    margin-top: 5px;
     font-size: 24px;
+    color:white;
     cursor: pointer;
     border-radius: 20px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, transform 0.2s;
+    text-decoration: none;
 }
 
 .open-login:hover, .to-exercise:hover, button:hover {
@@ -45,9 +50,3 @@ body {
     transform: scale(1.05);
 }
 
-.to-exercise {
-    text-decoration: none;
-    color: white;
-    display: inline-block;
-    font-weight: bold;
-}
