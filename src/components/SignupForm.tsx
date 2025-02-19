@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LoginForm.css"; 
+import "./PopupForm.css"; 
 
 interface SignUpFormProps {
   onSubmit: (userName: string, password: string) => void;

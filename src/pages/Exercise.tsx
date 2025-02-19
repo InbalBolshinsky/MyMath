@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Exercise.css';
+import { EndSessionForm } from '../components/EndSessionForm'; 
 
 export const Exercise = () => {
   const activityArr = ['+', '-', 'x', ':'];
@@ -15,11 +16,12 @@ export const Exercise = () => {
   const [correctAnswer, setCorrectAnswer] = useState<number | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState(600);
+  const [timeLeft, setTimeLeft] = useState(10); // Set the timer
   const [score, setScore] = useState(0);
   const [timerStarted, setTimerStarted] = useState(false);
   const [isMuted, setIsMuted] = useState(false); 
   const [isAnswerChecked, setIsAnswerChecked] = useState(false); 
+  const [isPopupOpen, setPopupOpen] = useState(false); // ✅ Now inside the component
 
   useEffect(() => {
     if (!timerStarted) return;
@@ -27,7 +29,7 @@ export const Exercise = () => {
       setTimeLeft(prevTime => {
         if (prevTime <= 1) {
           clearInterval(timer);
-          alert(`Time is up! You scored ${score} points`);
+          setPopupOpen(true);  // ✅ Show EndSessionForm when time is up
           return 0;
         }
         return prevTime - 1;
@@ -101,12 +103,28 @@ export const Exercise = () => {
     setIsMuted(prevState => !prevState);
   };
 
+  const handleRestart = () => {
+    setPopupOpen(false);   
+    setScore(0);          
+    setTimeLeft(10);       
+    setTimerStarted(false);
+    setExercise({          
+      activity: '',
+      first_num: 0,
+      second_num: 0
+    });
+    setUserInputAnswer(''); 
+    setCorrectAnswer(null); 
+    setIsCorrect(null);     
+    setErrorMessage(null);  
+  };
+
   return (
     <div className="exercise-container">
-      <div className="status-bar" style={{ position: 'absolute', top: '10px', left: '10px', right: '10px', fontSize: '20px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className="status-bar">
+        <div>
           <span>Score: {score}</span>
-          <button onClick={toggleSound} className="mute-btn" style={{ marginTop: '5px' }}>
+          <button onClick={toggleSound} className="mute-btn">
             {isMuted ? "🔇 Sound Off" : "🔊 Sound On"}
           </button>
         </div>
@@ -148,6 +166,12 @@ export const Exercise = () => {
       </button>
 
       <Link to="/" className="back-link">Go Back</Link>
+
+      <EndSessionForm 
+        isOpen={isPopupOpen} 
+        onRestart={handleRestart}  
+        score={score} 
+      />
     </div>
   );
 };

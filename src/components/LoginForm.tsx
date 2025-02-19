@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LoginForm.css";
+import "./PopupForm.css";
 import { SignUpForm } from "./SignupForm"; 
 
 interface LoginFormProps {
