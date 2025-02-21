@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Exercise.css';
 import { EndSessionForm } from '../components/EndSessionForm'; 
 
+interface ExerciseState {
+  difficulty: string;
+  timer: number;
+}
+
 export const Exercise = () => {
+  const location = useLocation();
+  const { difficulty, timer } = (location.state as ExerciseState) || { difficulty: "easy", timer: 600 };
   const activityArr = ['+', '-', 'x', ':'];
 
   const [exercise, setExercise] = useState({
@@ -21,7 +28,7 @@ export const Exercise = () => {
   const [timerStarted, setTimerStarted] = useState(false);
   const [isMuted, setIsMuted] = useState(false); 
   const [isAnswerChecked, setIsAnswerChecked] = useState(false); 
-  const [isPopupOpen, setPopupOpen] = useState(false); // ✅ Now inside the component
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
   useEffect(() => {
     if (!timerStarted) return;
@@ -37,6 +44,12 @@ export const Exercise = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, [timerStarted, score]);
+
+  function formatTime(seconds: number) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  }
 
   function generateExercise() {
     if (!timerStarted) setTimerStarted(true);
@@ -106,7 +119,7 @@ export const Exercise = () => {
   const handleRestart = () => {
     setPopupOpen(false);   
     setScore(0);          
-    setTimeLeft(10);       
+    setTimeLeft(timer);       
     setTimerStarted(false);
     setExercise({          
       activity: '',

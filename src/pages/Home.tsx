@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
 import './Home.css';
 import { LoginForm } from '../components/LoginForm';
-//stickers:
+import { SessionSettingsForm } from '../components/SessionSettingsForm';
+
+// stickers:
 import pencil from '../assets/stickers/pencil.png';
 import pencilCase from '../assets/stickers/pencil-case.png'; 
 import apple from '../assets/stickers/apple.png'; 
@@ -20,16 +21,17 @@ const stickers = [
 ];
 
 export const Home = () => {
-  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
+  const [isSessionSettingsPopupOpen, setSessionSettingsPopupOpen] = useState(false);
 
   const handleLoginSubmit = (userName: string, password: string) => {
-    if (!userName.trim() || !password.trim()) {
-      console.error("Username and password cannot be empty.");
-    } else {
-      console.log("Username:", userName);
-      console.log("Password:", password);
-    }
-    setPopupOpen(false);
+    console.log("Username:", userName, "Password:", password);
+    setLoginPopupOpen(false);
+  };
+
+  const handleSessionSettingsSubmit = (settings: any) => {
+    console.log("Session settings:", settings);
+    setSessionSettingsPopupOpen(false);
   };
 
   return (
@@ -39,10 +41,38 @@ export const Home = () => {
       ))}
       <h1 className='my-math'>MyMath</h1>
       <p className='welcome-msg'>Welcome to MyMath!</p>
-      <button className='open-login' onClick={() => setPopupOpen(true)}>Open Login</button>
-      <LoginForm isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} onSubmit={handleLoginSubmit} />
-      <Link className="to-exercise" to="/exercise">Let's Start Learning!</Link>
+      
+      <button className='open-login' onClick={() => setLoginPopupOpen(true)}>
+        Open Login
+      </button>
+      
+      <button className='open-session-settings' onClick={() => setSessionSettingsPopupOpen(true)}>
+        Let's Start Learning!
+      </button>
+      
+      {isLoginPopupOpen && (
+        <div className="modal-overlay" onClick={() => setLoginPopupOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <LoginForm 
+              isOpen={isLoginPopupOpen} 
+              onClose={() => setLoginPopupOpen(false)} 
+              onSubmit={handleLoginSubmit} 
+            />
+          </div>
+        </div>
+      )}
+
+      {isSessionSettingsPopupOpen && (
+        <div className="modal-overlay" onClick={() => setSessionSettingsPopupOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <SessionSettingsForm 
+              isOpen={isSessionSettingsPopupOpen} 
+              onClose={() => setSessionSettingsPopupOpen(false)} 
+              onSubmit={handleSessionSettingsSubmit} 
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
-
