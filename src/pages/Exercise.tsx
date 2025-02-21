@@ -23,7 +23,7 @@ export const Exercise = () => {
   const [correctAnswer, setCorrectAnswer] = useState<number | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState(10); // Set the timer
+  const [timeLeft, setTimeLeft] = useState(timer); 
   const [score, setScore] = useState(0);
   const [timerStarted, setTimerStarted] = useState(false);
   const [isMuted, setIsMuted] = useState(false); 

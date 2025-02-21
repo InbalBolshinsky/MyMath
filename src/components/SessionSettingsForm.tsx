@@ -8,18 +8,19 @@ interface SessionSettingsFormProps {
     onSubmit: (settings: { difficulty: string; timer: number }) => void;
 }
 
+const difficultyLevels = ["Easy", "Medium", "Hard"];
+
 export const SessionSettingsForm: React.FC<SessionSettingsFormProps> = ({ isOpen, onClose }) => {
-    const [difficulty, setDifficulty] = useState<string>("easy");
+    const [difficulty, setDifficulty] = useState<number>(0);
     const [timer, setTimer] = useState<number>(600); 
     const navigate = useNavigate();
 
     if (!isOpen) return null;
 
     const handleStartSession = () => {
-        const settings = { difficulty, timer };
+        const settings = { difficulty: difficultyLevels[difficulty].toLowerCase(), timer };
         console.log("Session Settings:", settings);
-        // Pass timer value to the Exercise page
-        navigate("/exercise", { state: { difficulty, timer } });
+        navigate("/exercise", { state: { difficulty: difficultyLevels[difficulty].toLowerCase(), timer } });
         onClose();
     };
 
@@ -31,27 +32,31 @@ export const SessionSettingsForm: React.FC<SessionSettingsFormProps> = ({ isOpen
                 <h2 className="settings-header">Session Settings</h2>
                 
                 <div className="settings-field">
-                    <label htmlFor="difficulty">Exercise Difficulty:</label>
-                    <select 
-                        id="difficulty" 
-                        value={difficulty} 
-                        onChange={(e) => setDifficulty(e.target.value)}
-                    >
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                    </select>
+                    <label>Exercise Difficulty:</label>
+                    <input
+                        type="range"
+                        min="0"
+                        max="2"
+                        step="1"
+                        value={difficulty}
+                        onChange={(e) => setDifficulty(parseInt(e.target.value))}
+                        className="custom-slider"
+                    />
+                    <div>{difficultyLevels[difficulty]}</div>
                 </div>
 
                 <div className="settings-field">
-                    <label htmlFor="timer">Timer (minutes):</label>
-                    <input 
-                        type="number" 
-                        id="timer" 
-                        value={timer / 60} // Display in minutes
+                    <label>Timer (Minutes):</label>
+                    <input
+                        type="range"
                         min="1"
-                        onChange={(e) => setTimer((parseInt(e.target.value) || 0) * 60)} 
-                    />
+                        max="15"
+                        step="0.1"
+                        value={timer / 60}
+                        onChange={(e) => setTimer(parseFloat(e.target.value) * 60)}
+                        className="custom-slider"
+                   />
+                    <div>{(timer / 60).toFixed(1)} minutes</div>
                 </div>
 
                 <div className="button-group">
@@ -66,3 +71,5 @@ export const SessionSettingsForm: React.FC<SessionSettingsFormProps> = ({ isOpen
         </div>
     );
 };
+
+export default SessionSettingsForm;
