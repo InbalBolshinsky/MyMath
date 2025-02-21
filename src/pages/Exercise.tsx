@@ -29,7 +29,7 @@ export const Exercise = () => {
       setTimeLeft(prevTime => {
         if (prevTime <= 1) {
           clearInterval(timer);
-          setPopupOpen(true);  // ✅ Show EndSessionForm when time is up
+          setPopupOpen(true);  
           return 0;
         }
         return prevTime - 1;
@@ -121,15 +121,20 @@ export const Exercise = () => {
 
   return (
     <div className="exercise-container">
-      <div className="status-bar">
-        <div>
-          <span>Score: {score}</span>
-          <button onClick={toggleSound} className="mute-btn">
-            {isMuted ? "🔇 Sound Off" : "🔊 Sound On"}
-          </button>
+     <div className="status-bar">
+      <div className="left-section">
+      <div className="score">
+            Score: {score}
         </div>
-        <span>Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</span>
+        <div className="timer">
+            Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+        </div>
       </div>
+      <button onClick={toggleSound} className="mute-btn">
+        {isMuted ? "🔇 Sound Off" : "🔊 Sound On"}
+      </button>
+    </div>
+
 
       {errorMessage && <p className="error-msg">{errorMessage}</p>}
       {isCorrect !== null && (
@@ -142,7 +147,10 @@ export const Exercise = () => {
         className="exercise-btn"
         onClick={generateExercise}
         style={{
-          fontSize: exercise.first_num === 0 && exercise.second_num === 0 ? "40px" : "100px",
+          fontSize: exercise.first_num === 0 && exercise.second_num === 0 ? "45px" : "60px",
+          width: exercise.first_num === 0 && exercise.second_num === 0 ? "500px" : "300px",
+          height: exercise.first_num === 0 && exercise.second_num === 0 ? "120px" : "110px",
+          paddingTop: exercise.first_num === 0 && exercise.second_num === 0 ? "15px" : "0px"
         }}
       >
         {exercise.first_num === 0 && exercise.second_num === 0
