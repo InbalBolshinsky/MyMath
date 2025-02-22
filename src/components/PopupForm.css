@@ -63,21 +63,23 @@
   width: 90% !important;
 }
 
-/* Keep the default slider style and change only the active color */
 input[type="range"].custom-slider {
   -webkit-appearance: none;
   width: 100%;
   background: transparetnt;
-  accent-color: #dd366b; /* Change only the active part to pink */
+  accent-color: #dd366b; 
 }
 
-/* Optional: Keep the default thumb design */
 input[type="range"].custom-slider::-webkit-slider-thumb {
-  -webkit-appearance: slider-horizontal; /* Maintain default thumb style */
+  -webkit-appearance: slider-horizontal; 
   cursor: pointer;
 }
 
-
+.difficulty, .time{
+  font-size: 15px;
+  color: #dd366b;
+  text-decoration-line: underline;
+}
 .popup-close-button {
   position: absolute;
   top: 0px;

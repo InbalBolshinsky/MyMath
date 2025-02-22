@@ -42,7 +42,7 @@ export const SessionSettingsForm: React.FC<SessionSettingsFormProps> = ({ isOpen
                         onChange={(e) => setDifficulty(parseInt(e.target.value))}
                         className="custom-slider"
                     />
-                    <div>{difficultyLevels[difficulty]}</div>
+                    <div className="difficulty">{difficultyLevels[difficulty]}</div>
                 </div>
 
                 <div className="settings-field">
@@ -56,7 +56,7 @@ export const SessionSettingsForm: React.FC<SessionSettingsFormProps> = ({ isOpen
                         onChange={(e) => setTimer(parseFloat(e.target.value) * 60)}
                         className="custom-slider"
                    />
-                    <div>{(timer / 60).toFixed(1)} minutes</div>
+                    <div className="time">{(timer / 60).toFixed(1)} minutes</div>
                 </div>
 
                 <div className="button-group">
