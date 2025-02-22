@@ -86,6 +86,56 @@ export const Exercise = () => {
     setUserInputAnswer('');
   }
 
+  function calcSolution(first_num: number, second_num: number, activity: string) {
+    switch (activity) {
+      case '+': return first_num + second_num;
+      case '-': return first_num - second_num;
+      case 'x': return first_num * second_num;
+      case ':': return second_num !== 0 ? first_num / second_num : NaN;
+      default: return NaN;
+    }
+  }
+  
+  const playSound = (soundFile: string) => {
+    if (!isMuted) {  
+      const audio = new Audio(soundFile);
+      audio.volume = 1.0;
+      audio.play().catch((error) => console.warn("Sound playback failed:", error));
+    }
+  };
+
+  const handleCorrectAnswer = () => {
+    setScore(prevScore => prevScore + 1);
+    playSound('./sounds/correct.mp3');
+  };
+
+  const handleWrongAnswer = () => {
+    playSound('./sounds/wrong.mp3');
+  };
+
+  const checkAnswer = () => {
+    if (isAnswerChecked) return;
+    setIsAnswerChecked(true);
+    const userAnswer = parseFloat(userInputAnswer);
+    if (isNaN(userAnswer)) {
+      setErrorMessage('Your answer should be a number.');
+      setIsCorrect(null);
+    } else {
+      const correct = userAnswer === exercise.answer;
+      setIsCorrect(correct);
+      setErrorMessage(null);
+      if (correct) {
+        handleCorrectAnswer();
+      } else {
+        handleWrongAnswer();
+      }
+    }
+  };
+
+  const toggleSound = () => {
+    setIsMuted(prevState => !prevState);
+  };
+
   const handleRestart = () => {
     setPopupOpen(false);
     setScore(0);
@@ -103,36 +153,22 @@ export const Exercise = () => {
     setErrorMessage(null);
   };
 
-  const checkAnswer = () => {
-    if (isAnswerChecked) return;
-    setIsAnswerChecked(true);
-    const userAnswer = parseFloat(userInputAnswer);
-    if (isNaN(userAnswer)) {
-      setErrorMessage('Your answer should be a number.');
-      setIsCorrect(null);
-    } else {
-      const correct = userAnswer === exercise.answer;
-      setIsCorrect(correct);
-      setErrorMessage(null);
-      if (correct) setScore((prevScore) => prevScore + 1);
-    }
-  };
-
-  const toggleSound = () => {
-    setIsMuted(prevState => !prevState);
-  };
-
   return (
     <div className='exercise-container'>
-      <div className='status-bar'>
-        <div className='score'>Score: {score}</div>
-        <div className='timer'>Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</div>
+       <div className="status-bar">
+        <div className="left-section">
+          <div className="score">
+            Score: {score}
+          </div>
+          <div className="timer">
+            Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+          </div>
+        </div>
+        <button onClick={toggleSound} className="mute-btn">
+          {isMuted ? "🔇 Sound Off" : "🔊 Sound On"}
+        </button>
       </div>
-
-      <button onClick={toggleSound} className='mute-btn'>
-        {isMuted ? '🔇 Sound Off' : '🔊 Sound On'}
-      </button>
-
+    
       {errorMessage && <p className='error-msg'>{errorMessage}</p>}
       {isCorrect !== null && (
         <p className='solution-msg' style={{ color: isCorrect ? 'green' : 'red' }}>
