@@ -5,11 +5,11 @@ import { SessionSettingsForm } from '../components/SessionSettingsForm';
 
 // stickers:
 import pencil from '../assets/stickers/pencil.png';
-import pencilCase from '../assets/stickers/pencil-case.png'; 
-import apple from '../assets/stickers/apple.png'; 
-import backpack from '../assets/stickers/backpack.png'; 
+import pencilCase from '../stickers/pencilCase.png'; 
+import apple from '../stickers/apple.png'; 
+import backpack from '../stickers/backpack.png'; 
 import calculator from '../assets/stickers/calculator.png'; 
-import ruler from '../assets/stickers/ruler.png';  
+import ruler from '../stickers/ruler.png';  
 
 const stickers = [
   { src: pencil, position: "top-left" },

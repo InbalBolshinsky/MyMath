@@ -1,0 +1,78 @@
+.progress-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .filter-container {
+    margin-bottom: 15px;
+  }
+  
+  .filter-select {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .exercise-table th, .exercise-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .achievement-card {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .unlocked {
+    background-color: #c8e6c9;
+  }
+  
+  .locked {
+    background-color: #f0f0f0;
+    color: #aaa;
+  }
+  
+  .progress-label {
+    margin-bottom: 5px;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    height: 20px;
+    overflow: hidden;
+  }
+  
+  .progress-bar-inner {
+    background-color: #4caf50;
+    height: 100%;
+    transition: width 0.3s;
+  }
+  
