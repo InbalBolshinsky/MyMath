@@ -163,20 +163,24 @@ export const Exercise = () => {
           <div className="timer">
             Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
           </div>
+          {errorMessage && <p className='error-msg'>{errorMessage}</p>}
+      {isCorrect !== null && (
+        <p className='solution-msg' style={{ color: isCorrect ? 'green' : 'red', marginLeft: isCorrect? '200px' : '0px'}}>
+          {isCorrect ? 'Well Done!' : `Incorrect answer. The correct answer is ${exercise.answer}`}
+        </p>
+      )}
         </div>
         <button onClick={toggleSound} className="mute-btn">
           {isMuted ? "🔇 Sound Off" : "🔊 Sound On"}
         </button>
       </div>
-    
-      {errorMessage && <p className='error-msg'>{errorMessage}</p>}
-      {isCorrect !== null && (
-        <p className='solution-msg' style={{ color: isCorrect ? 'green' : 'red' }}>
-          {isCorrect ? 'Well Done!' : `Incorrect answer. The correct answer is ${exercise.answer}`}
-        </p>
-      )}
 
-      <button className='exercise-btn' onClick={generateExercise}>
+      <button 
+      className='exercise-btn' 
+      onClick={generateExercise}
+      style={{
+        fontSize: exercise.question ? '70px' : '50px',
+      }}>
         {exercise.question || 'Click here to start'}
       </button>
 
