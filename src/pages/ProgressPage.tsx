@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProgressPage.css';
 
 interface ExerciseHistoryItem {
@@ -19,9 +20,10 @@ const ProgressPage: React.FC = () => {
   const [exerciseHistory, setExerciseHistory] = useState<ExerciseHistoryItem[]>([]);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [filter, setFilter] = useState('all');
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch data from the server (replace 'testuser' with the actual username if needed)
     fetch("http://localhost:5000/api/progress/testuser")
       .then((response) => response.json())
       .then((data) => {
@@ -99,6 +101,11 @@ const ProgressPage: React.FC = () => {
           </tbody>
         </table>
       </section>
+
+      {/* "Go Back" Button */}
+      <button className="go-back-btn" onClick={() => navigate(-1)}>
+        Go Back
+      </button>
     </div>
   );
 };

@@ -44,3 +44,22 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+.go-back-btn {
+  background-color: #F4C2C2; /* Light Pink */
+  font-family: 'Chewy', cursive;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.go-back-btn:hover {
+  background-color: #E89E9E; /* Darker Pink */
+  transform: scale(1.05);
+}
