@@ -15,20 +15,23 @@ User Authentication: Secure login and sign-up with MongoDB backend.
 - Hard: Advanced multiplication and division, fractions, decimals, percentages.
 
 
-### Personalization: Displays personalized messages and stores progress.
+#### Personalization: 
+Displays personalized messages and stores progress.
 
-### Achievements: Tracks user achievements and shows trophies.
+#### Achievements: 
+Tracks user achievements and shows trophies.
 
-### Engaging UI: Fun animations and positive feedback for correct answers.
+#### Engaging UI:
+Fun animations and positive feedback for correct answers.
 
 
 ## Technologies Used
 
-### Frontend: React with Tailwind CSS for a modern and responsive interface.
+#### - Frontend: React with Tailwind CSS for a modern and responsive interface.
 
-### Backend: Node.js with Express for API development.
+#### - Backend: Node.js with Express for API development.
 
-### Database: MongoDB for persistent data storage.
+#### - Database: MongoDB for persistent data storage.
 
 ## License
 
