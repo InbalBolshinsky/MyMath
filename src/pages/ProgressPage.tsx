@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProgressPage.css';
 
 interface ExerciseHistoryItem {
@@ -6,53 +6,45 @@ interface ExerciseHistoryItem {
   time: string;
   difficulty: string;
   score: string;
+  correct: number;
+  incorrect: number;
+}
+
+interface Achievement {
+  title: string;
+  unlocked: boolean;
 }
 
 const ProgressPage: React.FC = () => {
-  const [filter, setFilter] = useState('all');
   const [exerciseHistory, setExerciseHistory] = useState<ExerciseHistoryItem[]>([]);
-  const [achievements, setAchievements] = useState([]);
-  const [error, setError] = useState('');
-
-  const username = "testuser"; 
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    const fetchProgressData = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/progress/${username}`);
-        const data = await response.json();
-
-        if (response.ok) {
-          setExerciseHistory(data.exerciseHistory || []);
-          setAchievements(data.achievements || []);
-        } else {
-          setError(data.error || 'Failed to fetch progress data.');
-        }
-      } catch (error) {
-        console.error('Error fetching progress data:', error);
-        setError('Server error. Please try again later.');
-      }
-    };
-
-    fetchProgressData();
-  }, [username]);
+    // Fetch data from the server (replace 'testuser' with the actual username if needed)
+    fetch("http://localhost:5000/api/progress/testuser")
+      .then((response) => response.json())
+      .then((data) => {
+        setExerciseHistory(data.exerciseHistory || []);
+        setAchievements(data.achievements || []);
+      })
+      .catch((error) => console.error("Error fetching progress data:", error));
+  }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl mb-4">📖 Progress Page</h2>
+    <div className="progress-page-container">
+      <h2 className="page-title">📖 Progress Page</h2>
 
-      {error && <p className="text-red-500">{error}</p>}
+      <section className="exercise-history-section">
+        <h3 className="section-title">📝 Exercise History</h3>
 
-      <section className="mb-8">
-        <h3 className="text-xl mb-2">⿡ Exercise History</h3>
-
-        <div className="mb-4">
-          <label htmlFor="filter" className="mr-2">Filter by Difficulty:</label>
+        <div className="filter-container">
+          <label htmlFor="filter" className="filter-label">Filter by Difficulty:</label>
           <select
             id="filter"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="border px-2 py-1"
+            className="filter-select"
           >
             <option value="all">All</option>
             <option value="easy">Easy</option>
@@ -61,7 +53,7 @@ const ProgressPage: React.FC = () => {
           </select>
         </div>
 
-        <table className="w-full border">
+        <table className="table">
           <thead>
             <tr>
               <th>Date</th>
@@ -80,21 +72,32 @@ const ProgressPage: React.FC = () => {
                   <td>{item.time}</td>
                   <td>{item.difficulty}</td>
                   <td>{item.score}</td>
+                  <td>{'✔️'.repeat(item.correct)}{'❌'.repeat(item.incorrect)}</td>
                 </tr>
               ))}
           </tbody>
         </table>
       </section>
 
-      <section>
-        <h3 className="text-xl mb-2">⿢ Achievements</h3>
-        <div className="grid grid-cols-3 gap-4 mb-4">
-          {achievements.map((achievement, index) => (
-            <div key={index} className="p-4 border rounded-lg bg-green-200">
-              🏆 {achievement}
-            </div>
-          ))}
-        </div>
+      <section className="achievements-section">
+        <h3 className="section-title">🏆 Achievements</h3>
+
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Achievement</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {achievements.map((achievement, index) => (
+              <tr key={index}>
+                <td>{achievement.title}</td>
+                <td>{achievement.unlocked ? "Unlocked 🎉" : "Locked 🔒"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </section>
     </div>
   );

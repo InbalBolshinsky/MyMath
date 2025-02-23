@@ -19,12 +19,27 @@ export const Home = () => {
   const [isSignUpPopupOpen, setSignUpPopupOpen] = useState(false);
   const [isSessionSettingsPopupOpen, setSessionSettingsPopupOpen] = useState(false);
   const [welcomeMessage, setWelcomeMessage] = useState("Welcome to MyMath!");
+  const [errorPopup, setErrorPopup] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLoginSuccess = (username: string) => {
     setWelcomeMessage(`Welcome back, ${username}!`);
+    setIsLoggedIn(true);
     setLoginPopupOpen(false);
+  };
+
+  const handleProgressClick = () => {
+    if (isLoggedIn) {
+      navigate('/progress');
+    } else {
+      setErrorPopup("You need to log in to see progress.");
+    }
+  };
+
+  const closeErrorPopup = () => {
+    setErrorPopup(null);
   };
 
   return (
@@ -36,17 +51,18 @@ export const Home = () => {
       <h1 className='my-math'>MyMath</h1>
       <p className='welcome-msg'>{welcomeMessage}</p>
       
-      <button className='open-login' onClick={() => setLoginPopupOpen(true)}>
-        Login
-      </button>
-      
-      <button className='open-session-settings' onClick={() => setSessionSettingsPopupOpen(true)}>
-        Let's Start Learning!
+      <button className="button-pink" onClick={() => setLoginPopupOpen(true)}>
+      Login
       </button>
 
-      <button className='view-progress' onClick={() => navigate('/progress')}>
-        To Progress Page
-      </button>
+    <button className="button-pink" onClick={() => setSessionSettingsPopupOpen(true)}>
+      Let's Start Learning!
+    </button>
+
+    <button className="button-blue" onClick={handleProgressClick}>
+      To Progress Page
+    </button>
+
 
       {/* Login Form Popup */}
       {isLoginPopupOpen && (
@@ -88,6 +104,20 @@ export const Home = () => {
           </div>
         </div>
       )}
+
+      {/* Error Message Popup */}
+      {errorPopup && (
+        <div className="modal-overlay" onClick={closeErrorPopup}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2 className="error">Error</h2>
+            <p>{errorPopup}</p>
+            <button className="error-button" onClick={closeErrorPopup}>
+                Close
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

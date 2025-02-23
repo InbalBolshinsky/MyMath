@@ -61,8 +61,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Login</button>
-          <button type="button" onClick={onSignUpClick}>
+          <button className="button" type="submit">Login</button>
+          <button className="button" type="button" onClick={onSignUpClick}>
             Sign Up
           </button>
 

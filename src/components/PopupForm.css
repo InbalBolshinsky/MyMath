@@ -1,10 +1,4 @@
-.popup-modal div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
+/* Modal Layout */
 .popup-overlay {
   text-align: center;
   position: fixed;
@@ -16,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
 .popup-modal {
@@ -28,77 +23,149 @@
   position: relative;
 }
 
-.login-header, .signup-header, .settings-header {
+/* Ensuring all Headers are Blue */
+h2.login-header, 
+h2.signup-header, 
+h2.settings-header{
   font-size: 34px;
-    font-family: 'Chewy', cursive; 
-    color: #76AADB;
-    margin-top: 5px;
+  font-family: 'Chewy', cursive; 
+  color: #76AADB; /* Light Blue */
+  margin-top: 5px;
 }
 
-.popup-modal label {
-  position: relative;
-  display: block;
-  text-align: center;
-  font-size: 18px;
-  margin-bottom: 5px;
-  font-weight: bold;
-  width: 100%;
+h2.error{
+  font-size: 34px;
+  font-family: 'Chewy', cursive; 
+  color: #d93025; 
+  margin-top: 5px;
 }
-
+/* Input Fields */
 .popup-modal input {
   width: 80%;
   padding: 10px;
   margin: 5px 0;
   border-radius: 5px;
-  border: 2px solid #76AADB;
+  border: 2px solid #76AADB; /* Light Blue Border */
   font-size: 18px;
   text-align: center;
-  display: block;
   box-sizing: border-box;
 }
 
 .popup-modal input[type="text"],
 .popup-modal input[type="password"] {
-  text-align: center;
   width: 90% !important;
+  text-align: center;
+}
+
+/* Light Pink Buttons */
+button.button,  
+button.error-button, 
+button.start-session-btn,
+.go-back-btn{
+  background-color: #F4C2C2; /* Light Pink */
+  font-family: 'Chewy', cursive;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+button.popup-close-button{
+  background-color: #F4C2C2;
+  border: none;
+  font-size: 20px;
+  padding: 10px 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect */
+button.button:hover, 
+button.popup-close-button:hover, 
+button.error-button:hover, 
+button.start-session-btn:hover,
+.go-back-btn:hover {
+  background-color: #E89E9E; /* Darker Pink */
+}
+
+/* Close Button Specific */
+.popup-close-button {
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+/* Error Text */
+.error-text, 
+.error-popup {
+  color: #d93025; /* Red */
+  font-size: 15px;
+  font-weight: bold;
 }
 
 input[type="range"].custom-slider {
   -webkit-appearance: none;
+  width: 80%;
+  margin: 10px 0;
+  background: transparent;
+  outline: none;
+}
+
+/* Track styles */
+input[type="range"].custom-slider::-webkit-slider-runnable-track {
   width: 100%;
-  background: transparetnt;
-  accent-color: #dd366b; 
+  height: 10px;
+  background: #ffffff;
+  border-radius: 5px;
 }
 
+/* Thumb styles */
 input[type="range"].custom-slider::-webkit-slider-thumb {
-  -webkit-appearance: slider-horizontal; 
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #dd366b;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  transition: transform 0.2s;
+  margin-top:-5px;
 }
 
-.difficulty, .time{
-  font-size: 15px;
+input[type="range"].custom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+/* Focus state */
+input[type="range"].custom-slider:focus::-webkit-slider-thumb {
+  outline: none;
+  transform: scale(1.2);
+}
+
+
+input[type="range"].custom-slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+}
+
+
+/* Difficulty and Time Text Styles */
+.difficulty, .time {
+  font-size: 24px;
   color: #dd366b;
-  text-decoration-line: underline;
+  font-family: 'Chewy', cursive;
+  margin-top: 10px;
 }
-
-.error-text, .error-popup{
-  color: #d93025;
-  font-size: 15px;
-  font-weight: bold;
-}
- 
-.popup-close-button {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  border: none;
-  background-color: #F4C2C2;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.popup-close-button:hover{
-  background-color: #E89E9E;
-}
-  
