@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import './Home.css';
 import { LoginForm } from '../components/LoginForm';
+import { SignUpForm } from '../components/SignupForm';
 import { SessionSettingsForm } from '../components/SessionSettingsForm'; 
+import { useNavigate } from "react-router-dom";
 
 const stickers = [
   { src: '/stickers/pencil.png', position: 'top-left' },
@@ -14,59 +16,15 @@ const stickers = [
 
 export const Home = () => {
   const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
+  const [isSignUpPopupOpen, setSignUpPopupOpen] = useState(false);
   const [isSessionSettingsPopupOpen, setSessionSettingsPopupOpen] = useState(false);
-  const [welcomeMessage, setWelcomeMessage] = useState("");
+  const [welcomeMessage, setWelcomeMessage] = useState("Welcome to MyMath!");
 
-  const handleLoginSubmit = async (username: string, password: string) => {
-    try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-      
-      const data = await response.json();
+  const navigate = useNavigate();
 
-      if (response.ok) {
-        setWelcomeMessage(data.message); 
-        alert(data.message); 
-        setLoginPopupOpen(false); 
-      } else {
-        setWelcomeMessage(data.error); 
-        alert(data.error);
-      }
-    } catch (error) {
-      console.error("Login Error:", error);
-      setWelcomeMessage("Server error. Please try again later.");
-    }
-  };
-
-  const handleSignUpSubmit = async (username: string, password: string) => {
-    try {
-        const response = await fetch("http://localhost:5000/api/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
-        });
-        
-        const data = await response.json();
-
-        if (response.ok) {
-            alert(data.message); // "Signed up successfully!"
-            setLoginPopupOpen(false); // Optionally close the modal
-        } else {
-            alert(data.error); // Display any sign-up errors
-        }
-    } catch (error) {
-        console.error("Sign-Up Error:", error);
-        alert("Server error. Please try again later.");
-    }
-};
-
-
-  const handleSessionSettingsSubmit = (settings: any) => {
-    console.log("Session settings:", settings);
-    setSessionSettingsPopupOpen(false);
+  const handleLoginSuccess = (username: string) => {
+    setWelcomeMessage(`Welcome back, ${username}!`);
+    setLoginPopupOpen(false);
   };
 
   return (
@@ -74,36 +32,58 @@ export const Home = () => {
       {stickers.map((sticker, index) => (
         <img key={index} src={sticker.src} alt={`Sticker ${index + 1}`} className={`sticker sticker-${sticker.position}`} />
       ))}
+
       <h1 className='my-math'>MyMath</h1>
-      <p className='welcome-msg'>Welcome to MyMath!</p>
+      <p className='welcome-msg'>{welcomeMessage}</p>
       
       <button className='open-login' onClick={() => setLoginPopupOpen(true)}>
-        Open Login
+        Login
       </button>
       
       <button className='open-session-settings' onClick={() => setSessionSettingsPopupOpen(true)}>
         Let's Start Learning!
       </button>
-      
+
+      <button className='view-progress' onClick={() => navigate('/progress')}>
+        To Progress Page
+      </button>
+
+      {/* Login Form Popup */}
       {isLoginPopupOpen && (
         <div className="modal-overlay" onClick={() => setLoginPopupOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <LoginForm 
-              isOpen={isLoginPopupOpen} 
+              onSuccess={handleLoginSuccess} 
               onClose={() => setLoginPopupOpen(false)} 
-              onSubmit={handleLoginSubmit} 
+              onSignUpClick={() => {
+                setLoginPopupOpen(false);
+                setSignUpPopupOpen(true);
+              }}
             />
           </div>
         </div>
       )}
 
+      {/* Sign-Up Form Popup */}
+      {isSignUpPopupOpen && (
+        <div className="modal-overlay" onClick={() => setSignUpPopupOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <SignUpForm 
+              onSuccess={() => setSignUpPopupOpen(false)} 
+              onBack={() => setSignUpPopupOpen(false)} 
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Session Settings Form Popup */}
       {isSessionSettingsPopupOpen && (
         <div className="modal-overlay" onClick={() => setSessionSettingsPopupOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <SessionSettingsForm 
               isOpen={isSessionSettingsPopupOpen} 
               onClose={() => setSessionSettingsPopupOpen(false)} 
-              onSubmit={handleSessionSettingsSubmit} 
+              onSubmit={() => setSessionSettingsPopupOpen(false)} 
             />
           </div>
         </div>

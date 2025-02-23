@@ -81,12 +81,12 @@ input[type="range"].custom-slider::-webkit-slider-thumb {
   text-decoration-line: underline;
 }
 
-.message {
-  color: red;
+.error-text, .error-popup{
+  color: #d93025;
+  font-size: 15px;
   font-weight: bold;
-  margin-top: 10px;
 }
-
+ 
 .popup-close-button {
   position: absolute;
   top: 0px;

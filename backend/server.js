@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const authRoutes = require('./routes/auth'); // Import auth routes
+const authRoutes = require('./routes/auth');
+const progressRoutes = require('./routes/progress');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Use authentication routes
 app.use('/api/auth', authRoutes);
+app.use('/api/progress', progressRoutes); 
 
 // Default route for testing
 app.get('/', (req, res) => res.send('Server is running!'));
