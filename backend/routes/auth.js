@@ -8,7 +8,7 @@ const router = express.Router();
 
 // User Registration (Sign-Up)
 router.post('/register', async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, password } = req.body; // Removed email from destructuring
     try {
         // Check if username already exists
         const existingUser = await User.findOne({ username });
@@ -16,12 +16,12 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: 'Username already exists' });
         }
 
-        // Create and save the new user
-        const newUser = new User({ username, email, password });
+        // Create and save the new user without email
+        const newUser = new User({ username, password });
         await newUser.save();
         res.json({ message: 'Signed up successfully!' });
     } catch (err) {
-        console.error('Registration Error:', err);
+        console.error('Registration Error:', err.message);
         res.status(500).json({ error: 'Server error' });
     }
 });
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
 
         res.json({ message: `Welcome back, ${username}!`, token });
     } catch (err) {
-        console.error('Login Error:', err);
+        console.error('Login Error:', err.message);
         res.status(500).json({ error: 'Server error' });
     }
 });

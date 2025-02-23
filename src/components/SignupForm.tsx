@@ -18,7 +18,8 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, onBack }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: userName, password }),
-      });
+    });
+    
 
       const data = await response.json();
 
