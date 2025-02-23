@@ -1,4 +1,4 @@
-# MyMath
+# 🧮 MyMath
 
 MyMath is a web-based educational platform designed to make learning math fun and engaging for children from first to sixth grade. This project focuses on delivering age-appropriate math exercises, personalized user experiences, and interactive feedback to maintain children's interest and support their learning journey.
 
