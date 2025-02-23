@@ -1,24 +1,48 @@
 import React, { useState } from "react";
-import "./PopupForm.css"; 
+import "./PopupForm.css";
 
 interface SignUpFormProps {
-  onSubmit: (userName: string, password: string) => void;
-  onBack: () => void; 
+  onSubmit: (userName: string, password: string) => Promise<void>;
+  onBack: () => void;
 }
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, onBack }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    onSubmit(userName, password);
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: userName, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message); // "Signed up successfully!"
+        alert(data.message);
+        await onSubmit(userName, password); // Call parent onSubmit
+        onBack(); // Go back to login form
+      } else {
+        setMessage(data.error); // "Username already exists"
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error("Sign-Up Error:", error);
+      setMessage("Server error. Please try again later.");
+    }
   }
 
   return (
     <div className="popup-overlay">
       <div className="popup-modal">
-        <button className="popup-close-button" onClick={onBack}>✖</button>
+        <button className="popup-close-button" onClick={onBack}>
+          ✖
+        </button>
         <form onSubmit={handleSubmit}>
           <h2 className="signup-header">Sign Up</h2>
           <div>
@@ -42,7 +66,10 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, onBack }) => {
             />
           </div>
           <button type="submit">Sign Up</button>
-          <button type="button" onClick={onBack}>Back to Login</button>
+          <button type="button" onClick={onBack}>
+            Back to Login
+          </button>
+          {message && <p className="message">{message}</p>}
         </form>
       </div>
     </div>

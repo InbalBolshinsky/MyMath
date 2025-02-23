@@ -80,6 +80,13 @@ input[type="range"].custom-slider::-webkit-slider-thumb {
   color: #dd366b;
   text-decoration-line: underline;
 }
+
+.message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 .popup-close-button {
   position: absolute;
   top: 0px;

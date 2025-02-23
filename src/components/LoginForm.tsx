@@ -1,31 +1,62 @@
 import React, { useState } from "react";
 import "./PopupForm.css";
-import { SignUpForm } from "./SignupForm"; 
+import { SignUpForm } from "./SignupForm";
 
 interface LoginFormProps {
-  onSubmit: (userName: string, password: string) => void;
   isOpen: boolean;
   onClose: () => void;
+  onSubmit: (username: string, password: string) => Promise<void>;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, isOpen, onClose }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ isOpen, onClose }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false); 
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [message, setMessage] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    onSubmit(userName, password);
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: userName, password }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message);
+        alert(data.message); // "Welcome back, {username}!"
+        // Optional: Redirect to another page or close the modal
+        onClose();
+      } else {
+        setMessage(data.error); // "Invalid username or password"
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      setMessage("Server error. Please try again later.");
+    }
   }
 
   if (!isOpen) return null;
 
   return isSignUp ? (
-    <SignUpForm onSubmit={onSubmit} onBack={() => setIsSignUp(false)} />
+    <SignUpForm
+    onSubmit={async (userName, password) => {
+    setMessage("Signed up successfully!");
+    alert("Signed up successfully!"); 
+    setIsSignUp(false); // Switch back to login form
+  }}
+  onBack={() => setIsSignUp(false)}
+/>
+
   ) : (
     <div className="popup-overlay">
       <div className="popup-modal">
-        <button className="popup-close-button" onClick={onClose}>✖</button>
+        <button className="popup-close-button" onClick={onClose}>
+          ✖
+        </button>
         <form onSubmit={handleSubmit}>
           <h2 className="login-header">Login</h2>
           <div>
@@ -49,7 +80,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, isOpen, onClose 
             />
           </div>
           <button type="submit">Login</button>
-          <button type="button" onClick={() => setIsSignUp(true)}>Sign Up</button>
+          <button type="button" onClick={() => setIsSignUp(true)}>
+            Sign Up
+          </button>
+          {message && <p className="message">{message}</p>}
         </form>
       </div>
     </div>

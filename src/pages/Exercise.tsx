@@ -106,11 +106,11 @@ export const Exercise = () => {
 
   const handleCorrectAnswer = () => {
     setScore(prevScore => prevScore + 1);
-    playSound('./sounds/correct.mp3');
+    playSound('../public/sounds/correct.mp3'); 
   };
 
   const handleWrongAnswer = () => {
-    playSound('./sounds/wrong.mp3');
+    playSound('../public/sounds/wrong.mp3');
   };
 
   const checkAnswer = () => {

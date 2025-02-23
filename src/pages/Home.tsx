@@ -1,33 +1,68 @@
 import React, { useState } from "react";
 import './Home.css';
 import { LoginForm } from '../components/LoginForm';
-import { SessionSettingsForm } from '../components/SessionSettingsForm';
-
-// stickers:
-import pencil from '../assets/stickers/pencil.png';
-import pencilCase from '../stickers/pencilCase.png'; 
-import apple from '../stickers/apple.png'; 
-import backpack from '../stickers/backpack.png'; 
-import calculator from '../assets/stickers/calculator.png'; 
-import ruler from '../stickers/ruler.png';  
+import { SessionSettingsForm } from '../components/SessionSettingsForm'; 
 
 const stickers = [
-  { src: pencil, position: "top-left" },
-  { src: pencilCase, position: "top-right" },
-  { src: apple, position: "middle-left" },
-  { src: backpack, position: "middle-right" },
-  { src: calculator, position: "bottom-left" },
-  { src: ruler, position: "bottom-right" },
+  { src: '/stickers/pencil.png', position: 'top-left' },
+  { src: '/stickers/pencil-case.png', position: 'top-right' },
+  { src: '/stickers/apple.png', position: 'middle-left' },
+  { src: '/stickers/backpack.png', position: 'middle-right' },
+  { src: '/stickers/calculator.png', position: 'bottom-left' },
+  { src: '/stickers/ruler.png', position: 'bottom-right' },
 ];
 
 export const Home = () => {
   const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
   const [isSessionSettingsPopupOpen, setSessionSettingsPopupOpen] = useState(false);
+  const [welcomeMessage, setWelcomeMessage] = useState("");
 
-  const handleLoginSubmit = (userName: string, password: string) => {
-    console.log("Username:", userName, "Password:", password);
-    setLoginPopupOpen(false);
+  const handleLoginSubmit = async (username: string, password: string) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      
+      const data = await response.json();
+
+      if (response.ok) {
+        setWelcomeMessage(data.message); 
+        alert(data.message); 
+        setLoginPopupOpen(false); 
+      } else {
+        setWelcomeMessage(data.error); 
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      setWelcomeMessage("Server error. Please try again later.");
+    }
   };
+
+  const handleSignUpSubmit = async (username: string, password: string) => {
+    try {
+        const response = await fetch("http://localhost:5000/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+        });
+        
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.message); // "Signed up successfully!"
+            setLoginPopupOpen(false); // Optionally close the modal
+        } else {
+            alert(data.error); // Display any sign-up errors
+        }
+    } catch (error) {
+        console.error("Sign-Up Error:", error);
+        alert("Server error. Please try again later.");
+    }
+};
+
 
   const handleSessionSettingsSubmit = (settings: any) => {
     console.log("Session settings:", settings);
