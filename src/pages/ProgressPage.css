@@ -46,7 +46,7 @@ body {
 }
 
 .go-back-btn {
-  background-color: #F4C2C2; /* Light Pink */
+  background-color: #F4C2C2; 
   font-family: 'Chewy', cursive;
   border: none;
   padding: 10px 20px;
@@ -60,6 +60,6 @@ body {
 }
 
 .go-back-btn:hover {
-  background-color: #E89E9E; /* Darker Pink */
+  background-color: #E89E9E; 
   transform: scale(1.05);
 }

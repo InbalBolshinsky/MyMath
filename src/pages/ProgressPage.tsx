@@ -102,7 +102,6 @@ const ProgressPage: React.FC = () => {
         </table>
       </section>
 
-      {/* "Go Back" Button */}
       <button className="go-back-btn" onClick={() => navigate(-1)}>
         Go Back
       </button>
