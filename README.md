@@ -6,7 +6,7 @@ MyMath is a web-based educational platform designed to make learning math fun an
 
 User Authentication: Secure login and sign-up with MongoDB backend.
 
-### Math Exercises:
+#### Math Exercises:
 
 - Easy: Basic addition and subtraction, comparing numbers.
 
@@ -27,7 +27,7 @@ Fun animations and positive feedback for correct answers.
 
 ## Technologies Used
 
-#### - Frontend: React with Tailwind CSS for a modern and responsive interface.
+#### - Frontend: React with CSS for a modern and responsive interface.
 
 #### - Backend: Node.js with Express for API development.
 
