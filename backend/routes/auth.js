@@ -1,55 +1,73 @@
 // routes/auth.js
 const express = require('express');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Import the User model
+const User = require('../models/User');
 
 const router = express.Router();
-
-// User Registration (Sign-Up)
-router.post('/register', async (req, res) => {
-    const { username, password } = req.body; // Removed email from destructuring
-    try {
-        // Check if username already exists
-        const existingUser = await User.findOne({ username });
-        if (existingUser) {
-            return res.status(400).json({ error: 'Username already exists' });
-        }
-
-        // Create and save the new user without email
-        const newUser = new User({ username, password });
-        await newUser.save();
-        res.json({ message: 'Signed up successfully!' });
-    } catch (err) {
-        console.error('Registration Error:', err.message);
-        res.status(500).json({ error: 'Server error' });
-    }
-});
 
 // User Login
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
-        // Find user by username
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
 
-        // Check if password matches
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
 
-        // Generate JWT token (optional)
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        // Generate JWT token
+        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        res.json({ message: `Welcome back, ${username}!`, token });
+        // Set the token as an HTTP-only cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: false, // Set to true if using HTTPS
+            sameSite: 'Strict', // 'Lax' works well for same-origin requests
+            maxAge: 3600000, // 1 hour
+            path: '/'
+        });
+
+        console.log('Token set in cookies:', token);
+        res.json({ message: `Welcome back, ${username}!` });
     } catch (err) {
         console.error('Login Error:', err.message);
         res.status(500).json({ error: 'Server error' });
     }
+});
+
+// Check User Session
+router.get('/check-session', (req, res) => {
+    console.log('Cookies received on session check:', req.cookies); // Debugging log
+    const token = req.cookies?.token;
+
+    if (!token) {
+        console.warn('No token found in cookies');
+        return res.status(401).json({ error: 'No session found' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log('Session validated for user:', decoded.username);
+        res.json({ user: decoded.username });
+    } catch (err) {
+        console.error('Session Check Error:', err.message);
+        res.status(401).json({ error: 'Invalid or expired session' });
+    }
+});
+
+// User Logout
+router.post('/logout', (req, res) => {
+    res.clearCookie('token', {
+        httpOnly: true,
+        sameSite: 'Lax',
+        secure: false // Set to true in production with HTTPS
+    });
+    console.log('User logged out, token cleared from cookies');
+    res.json({ message: 'Logged out successfully' });
 });
 
 module.exports = router;

@@ -14,7 +14,7 @@ export const EndSessionForm: React.FC<EndSessionFormProps> = ({ isOpen, onRestar
     <div className="popup-overlay">
       <div className="popup-modal">
         <button className="popup-close-button" onClick={onRestart}>✖</button>
-        <h2>Session Over</h2>
+        <h2 className="session-over-header">Session Over</h2>
         <p>You scored {score} points!</p>
         <button className="restart-btn" onClick={onRestart}>Try Again</button>
       </div>

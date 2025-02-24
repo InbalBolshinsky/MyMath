@@ -174,7 +174,8 @@ export const Exercise = () => {
           {isMuted ? "🔇 Sound Off" : "🔊 Sound On"}
         </button>
       </div>
-
+      <div>
+      <p className='exercise-click'>Click here for the next exercise {'->'}</p>
       <button 
       className='exercise-btn' 
       onClick={generateExercise}
@@ -183,7 +184,7 @@ export const Exercise = () => {
       }}>
         {exercise.question || 'Click here to start'}
       </button>
-
+      </div>
       <div className='prompt-container'>
         <label className='whats-your-answer' htmlFor='answer'>What's your answer?</label>
         <input

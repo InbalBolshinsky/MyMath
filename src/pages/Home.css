@@ -61,23 +61,25 @@ button.button-pink:hover {
 button.view-progress, 
 button.button-blue, 
 .modal-content button.error-button {
-    background-color: #2a6fdb; /* Blue */
+    background-color: #d4adf9; 
     color: white;
     border: none;
     padding: 10px 20px;
     font-family: 'Chewy', cursive;
-    font-size: 20px;
-    border-radius: 10px;
+    font-size: 24px;
+    border-radius: 20px;
+    padding: 10px 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 button.view-progress:hover, 
 button.button-blue:hover,
 .modal-content button.error-button:hover {
-    background-color: #1e56b5; /* Darker Blue */
+    background-color: #c082f9;
     transform: scale(1.05);
 }
 

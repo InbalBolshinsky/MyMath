@@ -26,7 +26,8 @@
 /* Ensuring all Headers are Blue */
 h2.login-header, 
 h2.signup-header, 
-h2.settings-header{
+h2.settings-header,
+h2.session-over-header{
   font-size: 34px;
   font-family: 'Chewy', cursive; 
   color: #76AADB; /* Light Blue */
@@ -61,7 +62,10 @@ h2.error{
 button.button,  
 button.error-button, 
 button.start-session-btn,
-.go-back-btn{
+.go-back-btn, 
+.signup-button, 
+.restart-btn
+{
   background-color: #F4C2C2; /* Light Pink */
   font-family: 'Chewy', cursive;
   border: none;
@@ -91,11 +95,12 @@ button.button:hover,
 button.popup-close-button:hover, 
 button.error-button:hover, 
 button.start-session-btn:hover,
-.go-back-btn:hover {
-  background-color: #E89E9E; /* Darker Pink */
+.go-back-btn:hover, 
+.signup-button:hover,
+.restart-btn:hover {
+  background-color: #E89E9E; 
 }
 
-/* Close Button Specific */
 .popup-close-button {
   position: absolute;
   text-align: center;
@@ -107,10 +112,9 @@ button.start-session-btn:hover,
   height: 50px;
 }
 
-/* Error Text */
 .error-text, 
 .error-popup {
-  color: #d93025; /* Red */
+  color: #d93025; 
   font-size: 15px;
   font-weight: bold;
 }
@@ -131,7 +135,6 @@ input[type="range"].custom-slider::-webkit-slider-runnable-track {
   border-radius: 5px;
 }
 
-/* Thumb styles */
 input[type="range"].custom-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;

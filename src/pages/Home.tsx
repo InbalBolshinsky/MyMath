@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+// Home.tsx
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import { LoginForm } from '../components/LoginForm';
 import { SignUpForm } from '../components/SignupForm';
-import { SessionSettingsForm } from '../components/SessionSettingsForm'; 
-import { useNavigate } from "react-router-dom";
+import { SessionSettingsForm } from '../components/SessionSettingsForm';
 
 const stickers = [
   { src: '/stickers/pencil.png', position: 'top-left' },
@@ -18,23 +20,16 @@ export const Home = () => {
   const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = useState(false);
   const [isSessionSettingsPopupOpen, setSessionSettingsPopupOpen] = useState(false);
-  const [welcomeMessage, setWelcomeMessage] = useState("Welcome to MyMath!");
+  const [welcomeMessage, setWelcomeMessage] = useState('Welcome to MyMath!');
   const [errorPopup, setErrorPopup] = useState<string | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const navigate = useNavigate();
-
-  const handleLoginSuccess = (username: string) => {
-    setWelcomeMessage(`Welcome back, ${username}!`);
-    setIsLoggedIn(true);
-    setLoginPopupOpen(false);
-  };
+  const auth = useContext(AuthContext);
 
   const handleProgressClick = () => {
-    if (isLoggedIn) {
+    if (auth?.user) {
       navigate('/progress');
     } else {
-      setErrorPopup("You need to log in to see progress.");
+      setErrorPopup('You need to log in to see progress.');
     }
   };
 
@@ -49,28 +44,44 @@ export const Home = () => {
       ))}
 
       <h1 className='my-math'>MyMath</h1>
-      <p className='welcome-msg'>{welcomeMessage}</p>
-      
-      <button className="button-pink" onClick={() => setLoginPopupOpen(true)}>
-      Login
+      <p className='welcome-msg'>{auth?.user ? `Welcome back, ${auth.user}!` : welcomeMessage}</p>
+
+      {!auth?.user && (
+        <button className='button-pink' onClick={() => setLoginPopupOpen(true)}>
+          Login
+        </button>
+      )}
+
+      {auth?.user && (
+        <button
+          onClick={auth.logout}
+          className='button-pink'
+        >
+          Log Out
+        </button>
+      )}
+
+      <button className='button-pink' onClick={() => setSessionSettingsPopupOpen(true)}>
+        Let's Start Learning!
       </button>
 
-    <button className="button-pink" onClick={() => setSessionSettingsPopupOpen(true)}>
-      Let's Start Learning!
-    </button>
-
-    <button className="button-blue" onClick={handleProgressClick}>
-      To Progress Page
-    </button>
-
+      <button className='button-blue' onClick={handleProgressClick}>
+        To Progress Page
+      </button>
 
       {/* Login Form Popup */}
       {isLoginPopupOpen && (
-        <div className="modal-overlay" onClick={() => setLoginPopupOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <LoginForm 
-              onSuccess={handleLoginSuccess} 
-              onClose={() => setLoginPopupOpen(false)} 
+        <div className='modal-overlay' onClick={() => setLoginPopupOpen(false)}>
+          <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+            <LoginForm
+              onSuccess={(username: string) => {
+                if (auth?.setUser) {
+                  auth.setUser(username); // Properly set user in AuthContext
+                }
+                setWelcomeMessage(`Welcome back, ${username}!`);
+                setLoginPopupOpen(false);
+              }}
+              onClose={() => setLoginPopupOpen(false)}
               onSignUpClick={() => {
                 setLoginPopupOpen(false);
                 setSignUpPopupOpen(true);
@@ -82,8 +93,8 @@ export const Home = () => {
 
       {/* Sign-Up Form Popup */}
       {isSignUpPopupOpen && (
-        <div className="modal-overlay" onClick={() => setSignUpPopupOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className='modal-overlay' onClick={() => setSignUpPopupOpen(false)}>
+          <div className='modal-content' onClick={(e) => e.stopPropagation()}>
             <SignUpForm 
               onSuccess={() => setSignUpPopupOpen(false)} 
               onBack={() => setSignUpPopupOpen(false)} 
@@ -94,8 +105,8 @@ export const Home = () => {
 
       {/* Session Settings Form Popup */}
       {isSessionSettingsPopupOpen && (
-        <div className="modal-overlay" onClick={() => setSessionSettingsPopupOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className='modal-overlay' onClick={() => setSessionSettingsPopupOpen(false)}>
+          <div className='modal-content' onClick={(e) => e.stopPropagation()}>
             <SessionSettingsForm 
               isOpen={isSessionSettingsPopupOpen} 
               onClose={() => setSessionSettingsPopupOpen(false)} 
@@ -107,17 +118,16 @@ export const Home = () => {
 
       {/* Error Message Popup */}
       {errorPopup && (
-        <div className="modal-overlay" onClick={closeErrorPopup}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2 className="error">Error</h2>
+        <div className='modal-overlay' onClick={closeErrorPopup}>
+          <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+            <h2 className='error'>Error</h2>
             <p>{errorPopup}</p>
-            <button className="error-button" onClick={closeErrorPopup}>
-                Close
+            <button className='error-button' onClick={closeErrorPopup}>
+              Close
             </button>
           </div>
         </div>
       )}
-
     </div>
   );
 };

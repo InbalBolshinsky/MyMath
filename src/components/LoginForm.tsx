@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+// src/components/LoginForm.tsx
+import React, { useState, useContext } from "react";
 import "./PopupForm.css";
+import { AuthContext } from "../context/AuthContext";
 
 interface LoginFormProps {
   onSuccess: (username: string) => void;
@@ -15,29 +17,35 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const auth = useContext(AuthContext);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    try {
+async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: userName, password }),
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: userName, password }),
+          credentials: "include" 
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        onSuccess(userName); // Notify Home.tsx of successful login
-        setErrorMessage("");
+          if (auth?.setUser) {
+              auth.setUser(userName); // Update the AuthContext
+          }
+          onSuccess(userName); // Notify Home.tsx of successful login
+          setErrorMessage("");
       } else {
-        setErrorMessage(data.error);
+          setErrorMessage(data.error || "Login failed.");
       }
-    } catch (error) {
+  } catch (error) {
       console.error("Login Error:", error);
       setErrorMessage("Server error. Please try again later.");
-    }
   }
+}
+
 
   return (
     <div className="popup-overlay">

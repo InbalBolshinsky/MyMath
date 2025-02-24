@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     exerciseHistory: [exerciseHistorySchema],
     trophies: [{ type: String }],
+    highScore: { type: Number, default: 0 }
 });
 
 userSchema.pre('save', async function (next) {

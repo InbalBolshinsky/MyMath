@@ -30,7 +30,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
         setSuccessMessage("Signed up successfully! Please log in.");
         setErrorMessage("");
         setTimeout(() => {
-          onSuccess(); // Close modal after showing success
+          onSuccess(); 
         }, 2000);
       } else {
         setErrorMessage(data.error);
@@ -65,8 +65,8 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Sign Up</button>
-          <button type="button" onClick={onBack}>
+          <button className="signup-button" type="submit">Sign Up</button>
+          <button className="go-back-btn" type="button" onClick={onBack}>
             Back to Login
           </button>
 
