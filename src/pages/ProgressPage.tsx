@@ -100,7 +100,7 @@ const ProgressPage: React.FC = () => {
             );
             const trophyStyle =
             trophyName === "MyMath Master: collected all trophies"
-            ? { marginLeft: "26.2%" }
+            ? { marginLeft: "4%" }
             : {};
             return (
               <div key={index} className={`trophy ${isUnlocked ? 'unlocked' : 'locked'}`} style={trophyStyle}>
