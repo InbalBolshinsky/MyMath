@@ -1,4 +1,3 @@
-// src/pages/Exercise.tsx
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -41,7 +40,7 @@ export const Exercise = () => {
   const submitSessionData = async () => {
     try {
       const sessionData = {
-        difficulty, // from the location state
+        difficulty, 
         score, 
         timer
       };
@@ -63,7 +62,6 @@ export const Exercise = () => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(timerInterval);
-          // When time runs out, open the session end popup
           setPopupOpen(true);
           return 0;
         }

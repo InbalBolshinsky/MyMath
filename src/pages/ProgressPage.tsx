@@ -16,6 +16,17 @@ interface Achievement {
   unlocked: boolean;
 }
 
+const trophyMap: { [key: string]: string } = {
+  'First Exercise Completed': 'award-blue.png',
+  '3 in a row': 'award-green.png',
+  '5 correct in 5 mins': 'award-pink.png',
+  '5 in a row': 'award-purple.png',
+  'High score above 10': 'award-red.png',
+  'Master Problem Solver: collected all trophies': 'award-yellow.png'
+};
+
+const allTrophies = Object.keys(trophyMap);
+
 const ProgressPage: React.FC = () => {
   const [exerciseHistory, setExerciseHistory] = useState<ExerciseHistoryItem[]>([]);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
@@ -36,10 +47,10 @@ const ProgressPage: React.FC = () => {
   
   return (
     <div className="progress-page-container">
-      <h2 className="page-title">📖 Progress Page</h2>
+      <h2 className="page-title">Progress Page</h2>
 
       <section className="exercise-history-section">
-        <h3 className="section-title">📝 Exercise History</h3>
+        <h3 className="section-title">Exercise History</h3>
 
         <div className="filter-container">
           <label htmlFor="filter" className="filter-label">Filter by Difficulty:</label>
@@ -63,7 +74,6 @@ const ProgressPage: React.FC = () => {
               <th>Time</th>
               <th>Difficulty</th>
               <th>Score</th>
-              <th>Performance</th>
             </tr>
           </thead>
           <tbody>
@@ -75,7 +85,6 @@ const ProgressPage: React.FC = () => {
                   <td>{item.time}</td>
                   <td>{item.difficulty}</td>
                   <td>{item.score}</td>
-                  <td>{'✔️'.repeat(item.correct)}{'❌'.repeat(item.incorrect)}</td>
                 </tr>
               ))}
           </tbody>
@@ -84,23 +93,23 @@ const ProgressPage: React.FC = () => {
 
       <section className="achievements-section">
         <h3 className="section-title">🏆 Achievements</h3>
-
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Achievement</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {achievements.map((achievement, index) => (
-              <tr key={index}>
-                <td>{achievement.title}</td>
-                <td>{achievement.unlocked ? "Unlocked 🎉" : "Locked 🔒"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <div className="trophy-container">
+          {allTrophies.map((trophyName, index) => {
+            const isUnlocked = achievements.some(
+            (achievement) => achievement.title === trophyName && achievement.unlocked
+            );
+            const trophyStyle =
+            trophyName === "Master Problem Solver: collected all trophies"
+            ? { marginLeft: "25%" }
+            : {};
+            return (
+              <div key={index} className={`trophy ${isUnlocked ? 'unlocked' : 'locked'}`} style={trophyStyle}>
+              <img src={`/trophies/${trophyMap[trophyName]}`} alt={trophyName} />
+              <p className='trophy-name'>{trophyName}</p>
+              </div>
+            );
+          })}
+          </div>
       </section>
 
       <button className="go-back-btn" onClick={() => navigate(-1)}>
