@@ -22,7 +22,7 @@ const trophyMap: { [key: string]: string } = {
   '5 correct in 5 mins': 'award-pink.png',
   '5 in a row': 'award-purple.png',
   'High score above 10': 'award-red.png',
-  'Master Problem Solver: collected all trophies': 'award-yellow.png'
+  'MyMath Master: collected all trophies': 'award-yellow.png'
 };
 
 const allTrophies = Object.keys(trophyMap);
@@ -99,8 +99,8 @@ const ProgressPage: React.FC = () => {
             (achievement) => achievement.title === trophyName && achievement.unlocked
             );
             const trophyStyle =
-            trophyName === "Master Problem Solver: collected all trophies"
-            ? { marginLeft: "25%" }
+            trophyName === "MyMath Master: collected all trophies"
+            ? { marginLeft: "26.2%" }
             : {};
             return (
               <div key={index} className={`trophy ${isUnlocked ? 'unlocked' : 'locked'}`} style={trophyStyle}>

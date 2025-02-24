@@ -53,9 +53,9 @@ const checkAndUpdateTrophies = async (user) => {
       'High score above 10'
     ];
     const hasAll = requiredTrophies.every(t => user.trophies.includes(t));
-    if (hasAll && !user.trophies.includes('Master Problem Solver: collected all trophies')) {
+    if (hasAll && !user.trophies.includes('MyMath Master: collected all trophies')) {
       user.trophies.push('Master Problem Solver: collected all trophies');
-      console.log('Achievement unlocked: Master Problem Solver: collected all trophies');
+      console.log('Achievement unlocked: MyMath Master: collected all trophies');
     }
   
     await user.save();
