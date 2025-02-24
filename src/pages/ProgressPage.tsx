@@ -19,8 +19,8 @@ interface Achievement {
 const trophyMap: { [key: string]: string } = {
   'First Exercise Completed': 'award-blue.png',
   '3 in a row': 'award-green.png',
-  '5 correct in 5 mins': 'award-pink.png',
   '5 in a row': 'award-purple.png',
+  '7 in a row': 'award-pink.png',
   'High score above 10': 'award-red.png',
   'MyMath Master: collected all trophies': 'award-yellow.png'
 };
@@ -30,6 +30,7 @@ const allTrophies = Object.keys(trophyMap);
 const ProgressPage: React.FC = () => {
   const [exerciseHistory, setExerciseHistory] = useState<ExerciseHistoryItem[]>([]);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [highScore, setHighScore] = useState<number>(0);
   const [filter, setFilter] = useState('all');
   
   const navigate = useNavigate();
@@ -40,10 +41,18 @@ const ProgressPage: React.FC = () => {
       .then((data) => {
         console.log("Progress data received:", data);
         setExerciseHistory(data.exerciseHistory || []);
-        setAchievements(data.achievements || []);
+
+        const normalizedAchievements = allTrophies.map(trophyName => ({
+          title: trophyName,
+          unlocked: data.achievements.includes(trophyName)
+        }));
+
+        setAchievements(normalizedAchievements);
+        setHighScore(data.highScore || 0);
       })
       .catch((error) => console.error("Error fetching progress data:", error));
   }, []);
+
   
   return (
     <div className="progress-page-container">
@@ -65,6 +74,8 @@ const ProgressPage: React.FC = () => {
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
+
+          <p className="highscore-label">High score: {highScore}</p>
         </div>
 
         <table className="table">
@@ -92,25 +103,34 @@ const ProgressPage: React.FC = () => {
       </section>
 
       <section className="achievements-section">
-        <h3 className="section-title">🏆 Achievements</h3>
-          <div className="trophy-container">
-          {allTrophies.map((trophyName, index) => {
-            const isUnlocked = achievements.some(
-            (achievement) => achievement.title === trophyName && achievement.unlocked
-            );
-            const trophyStyle =
-            trophyName === "MyMath Master: collected all trophies"
-            ? { marginLeft: "4%" }
-            : {};
-            return (
-              <div key={index} className={`trophy ${isUnlocked ? 'unlocked' : 'locked'}`} style={trophyStyle}>
-              <img src={`/trophies/${trophyMap[trophyName]}`} alt={trophyName} />
-              <p className='trophy-name'>{trophyName}</p>
-              </div>
-            );
-          })}
-          </div>
-      </section>
+  <h3 className="section-title">🏆 Achievements</h3>
+  <div className="trophy-container">
+    {allTrophies.map((trophyName, index) => {
+      const isUnlocked = achievements.some(
+        (achievement) => achievement.title === trophyName && achievement.unlocked
+      );
+
+      console.log(`Trophy: ${trophyName} | Unlocked: ${isUnlocked}`); // Debugging output
+
+      const trophyStyle =
+        trophyName === "MyMath Master: collected all trophies"
+          ? { marginLeft: "4%" }
+          : {};
+
+      return (
+        <div
+          key={index}
+          className={`trophy ${isUnlocked ? "unlocked" : "locked"}`}
+          style={trophyStyle}
+        >
+          <img src={`/trophies/${trophyMap[trophyName]}`} alt={trophyName} />
+          <p className="trophy-name">{trophyName}</p>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
 
       <button className="go-back-btn" onClick={() => navigate(-1)}>
         Go Back

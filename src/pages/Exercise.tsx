@@ -29,6 +29,9 @@ export const Exercise = () => {
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+
 
   const operationLevels: Record<'easy' | 'medium' | 'hard', string[]> = {
     easy: ['+', '-'],
@@ -36,25 +39,28 @@ export const Exercise = () => {
     hard: ['+', '-', 'x', ':']
   };
 
-  // Function to submit session data to backend
   const submitSessionData = async () => {
     try {
-      const sessionData = {
-        difficulty, 
-        score, 
-        timer
-      };
+        const sessionData = {
+            difficulty, 
+            score, 
+            correct: correctAnswers, 
+            incorrect: incorrectAnswers,
+            duration: Math.floor((timer - timeLeft) / 60)
+        };
 
-      const response = await axios.post(
-        'http://localhost:5000/api/progress/update-session',
-        sessionData,
-        { withCredentials: true }
-      );
-      console.log('Session data saved:', response.data);
+        const response = await axios.post(
+            'http://localhost:5000/api/progress/update-session',
+            sessionData,
+            { withCredentials: true }
+        );
+        console.log('Session data saved:', response.data);
+        console.log('High Score received:', response.data.highScore);
     } catch (error) {
-      console.error('Error saving session data:', error);
+        console.error('Error saving session data:', error);
     }
-  };
+};
+
 
   useEffect(() => {
     if (!timerStarted) return;
@@ -126,12 +132,15 @@ export const Exercise = () => {
 
   const handleCorrectAnswer = () => {
     setScore(prevScore => prevScore + 1);
+    setCorrectAnswers(prev => prev + 1); 
     playSound('../public/sounds/correct.mp3'); 
-  };
+};
 
-  const handleWrongAnswer = () => {
+const handleWrongAnswer = () => {
+    setIncorrectAnswers(prev => prev + 1); 
     playSound('../public/sounds/wrong.mp3');
-  };
+};
+
 
   const checkAnswer = () => {
     if (isAnswerChecked) return;
@@ -162,16 +171,19 @@ export const Exercise = () => {
     setTimeLeft(timer);
     setTimerStarted(false);
     setExercise({
-      activity: '',
-      first_num: 0,
-      second_num: 0,
-      question: '',
-      answer: 0
+        activity: '',
+        first_num: 0,
+        second_num: 0,
+        question: '',
+        answer: 0
     });
     setUserInputAnswer('');
     setIsCorrect(null);
     setErrorMessage(null);
-  };
+    setCorrectAnswers(0); 
+    setIncorrectAnswers(0); 
+};
+
 
   return (
     <div className='exercise-container'>

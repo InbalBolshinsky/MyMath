@@ -54,7 +54,10 @@ export const Home = () => {
 
       {auth?.user && (
         <button
-          onClick={auth.logout}
+        onClick={() => {
+          auth.logout();
+          setWelcomeMessage('Welcome to MyMath!'); 
+        }}
           className='button-pink'
         >
           Log Out
