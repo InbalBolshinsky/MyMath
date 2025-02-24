@@ -24,15 +24,16 @@ const ProgressPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/progress/testuser")
+    fetch("http://localhost:5000/api/progress", { credentials: 'include' })
       .then((response) => response.json())
       .then((data) => {
+        console.log("Progress data received:", data);
         setExerciseHistory(data.exerciseHistory || []);
         setAchievements(data.achievements || []);
       })
       .catch((error) => console.error("Error fetching progress data:", error));
   }, []);
-
+  
   return (
     <div className="progress-page-container">
       <h2 className="page-title">📖 Progress Page</h2>

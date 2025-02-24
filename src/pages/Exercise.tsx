@@ -1,5 +1,7 @@
+// src/pages/Exercise.tsx
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import './Exercise.css';
 import { EndSessionForm } from '../components/EndSessionForm';
 
@@ -19,7 +21,6 @@ export const Exercise = () => {
     question: '',
     answer: 0
   });
-
   const [userInputAnswer, setUserInputAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -36,20 +37,41 @@ export const Exercise = () => {
     hard: ['+', '-', 'x', ':']
   };
 
+  // Function to submit session data to backend
+  const submitSessionData = async () => {
+    try {
+      const sessionData = {
+        difficulty, // from the location state
+        score, 
+        timer
+      };
+
+      const response = await axios.post(
+        'http://localhost:5000/api/progress/update-session',
+        sessionData,
+        { withCredentials: true }
+      );
+      console.log('Session data saved:', response.data);
+    } catch (error) {
+      console.error('Error saving session data:', error);
+    }
+  };
+
   useEffect(() => {
     if (!timerStarted) return;
-    const timer = setInterval(() => {
+    const timerInterval = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
-          clearInterval(timer);
+          clearInterval(timerInterval);
+          // When time runs out, open the session end popup
           setPopupOpen(true);
           return 0;
         }
         return prevTime - 1;
       });
     }, 1000);
-    return () => clearInterval(timer);
-  }, [timerStarted, score]);
+    return () => clearInterval(timerInterval);
+  }, [timerStarted]);
 
   function generateExercise() {
     if (!timerStarted) setTimerStarted(true);
@@ -155,7 +177,7 @@ export const Exercise = () => {
 
   return (
     <div className='exercise-container'>
-       <div className="status-bar">
+      <div className="status-bar">
         <div className="left-section">
           <div className="score">
             Score: {score}
@@ -164,26 +186,26 @@ export const Exercise = () => {
             Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
           </div>
           {errorMessage && <p className='error-msg'>{errorMessage}</p>}
-      {isCorrect !== null && (
-        <p className='solution-msg' style={{ color: isCorrect ? 'green' : 'red', marginLeft: isCorrect? '200px' : '0px'}}>
-          {isCorrect ? 'Well Done!' : `Incorrect answer. The correct answer is ${exercise.answer}`}
-        </p>
-      )}
+          {isCorrect !== null && (
+            <p className='solution-msg' style={{ color: isCorrect ? 'green' : 'red', marginLeft: isCorrect ? '200px' : '0px' }}>
+              {isCorrect ? 'Well Done!' : `Incorrect answer. The correct answer is ${exercise.answer}`}
+            </p>
+          )}
         </div>
         <button onClick={toggleSound} className="mute-btn">
           {isMuted ? "🔇 Sound Off" : "🔊 Sound On"}
         </button>
       </div>
       <div>
-      <p className='exercise-click'>Click here for the next exercise {'->'}</p>
-      <button 
-      className='exercise-btn' 
-      onClick={generateExercise}
-      style={{
-        fontSize: exercise.question ? '70px' : '50px',
-      }}>
-        {exercise.question || 'Click here to start'}
-      </button>
+        <p className='exercise-click'>Click here for the next exercise {'->'}</p>
+        <button 
+          className='exercise-btn' 
+          onClick={generateExercise}
+          style={{
+            fontSize: exercise.question ? '70px' : '50px',
+          }}>
+          {exercise.question || 'Click here to start'}
+        </button>
       </div>
       <div className='prompt-container'>
         <label className='whats-your-answer' htmlFor='answer'>What's your answer?</label>
@@ -195,14 +217,20 @@ export const Exercise = () => {
           placeholder='Enter your answer'
         />
       </div>
-
       <button className='check-answer' onClick={checkAnswer} disabled={isAnswerChecked}>
         Check Answer
       </button>
-
       <Link to='/' className='back-link'>Go Back</Link>
 
-      <EndSessionForm isOpen={isPopupOpen} score={score} onRestart={handleRestart} />
+      {/* Pass a combined function to EndSessionForm: first submit session data, then restart */}
+      <EndSessionForm 
+        isOpen={isPopupOpen} 
+        score={score} 
+        onRestart={async () => {
+          await submitSessionData();
+          handleRestart();
+        }} 
+      />
     </div>
   );
 };

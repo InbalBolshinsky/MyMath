@@ -16,13 +16,12 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+// Existing POST route for updating session
 router.post('/update-session', verifyToken, async (req, res) => {
   try {
-    // Find the user by the ID decoded from the token
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    // Create the new session object using data from the request or defaults
     const newSession = {
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString(),
@@ -30,13 +29,26 @@ router.post('/update-session', verifyToken, async (req, res) => {
       score: req.body.score || '0'
     };
 
-    // Push the new session to the user's exerciseHistory array
     user.exerciseHistory.push(newSession);
     await user.save();
 
     res.json({ message: 'Session updated', session: newSession });
   } catch (err) {
     console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// NEW: GET route for retrieving progress data
+router.get('/', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    res.json({
+      exerciseHistory: user.exerciseHistory || [],
+      achievements: user.achievements || []
+    });
+  } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
 });
