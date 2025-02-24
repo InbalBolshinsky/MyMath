@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
 
-/* General Styles */
 body {
     font-family: 'Gloria Hallelujah', cursive;
     text-align: center;
@@ -14,7 +13,6 @@ body {
     margin-top: 50px;
 }
 
-/* Main Title */
 .my-math {
     font-size: 120px;
     letter-spacing: 4px;
@@ -24,7 +22,6 @@ body {
     text-shadow: 2px 2px 5px rgba(233, 138, 161, 0.5);
 }
 
-/* Welcome Message */
 .welcome-msg {
     font-size: 34px;
     font-family: 'Chewy', cursive; 
@@ -32,11 +29,10 @@ body {
     margin-top: 5px;
 }
 
-/* Pink Buttons (Login, Sign Up, Let's Start Learning) */
 button.open-login, 
 button.open-session-settings,
 button.button-pink {
-    background-color: #F4C2C2; /* Light Pink */
+    background-color: #F4C2C2; 
     font-family: 'Chewy', cursive;
     border: none;
     padding: 10px 20px;
@@ -53,11 +49,10 @@ button.button-pink {
 button.open-login:hover, 
 button.open-session-settings:hover,
 button.button-pink:hover {
-    background-color: #E89E9E; /* Darker Pink */
+    background-color: #E89E9E; 
     transform: scale(1.05);
 }
 
-/* Blue Button for "To Progress Page" and Error Popup */
 button.view-progress, 
 button.button-blue, 
 .modal-content button.error-button {
@@ -83,13 +78,11 @@ button.button-blue:hover,
     transform: scale(1.05);
 }
 
-/* Error Message */
 .error {
     color: #e7403a; 
     margin-bottom: 10px;
 }
 
-/* Sticker Styles */
 .sticker {
     position: absolute;
     width: 100px;
@@ -104,7 +97,6 @@ button.button-blue:hover,
 .sticker-bottom-left { bottom: 20px; left: 20px; }
 .sticker-bottom-right { bottom: 20px; right: 20px; }
 
-/* Modal Overlay */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -118,7 +110,6 @@ button.button-blue:hover,
     z-index: 1000;
 }
   
-/* Modal Content */
 .modal-content {
     background-color: white;
     padding: 30px;
@@ -128,7 +119,6 @@ button.button-blue:hover,
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Modal Headers */
 .modal-content h2 {
     font-family: 'Chewy', cursive;
     font-size: 32px;

@@ -1,4 +1,3 @@
-// routes/auth.js
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
@@ -25,9 +24,9 @@ router.post('/login', async (req, res) => {
         // Set the token as an HTTP-only cookie
         res.cookie('token', token, {
             httpOnly: true,
-            secure: false, // Set to true if using HTTPS
-            sameSite: 'Strict', // 'Lax' works well for same-origin requests
-            maxAge: 3600000, // 1 hour
+            secure: false, 
+            sameSite: 'Strict', 
+            maxAge: 3600000, 
             path: '/'
         });
 
@@ -41,7 +40,6 @@ router.post('/login', async (req, res) => {
 
 // Check User Session
 router.get('/check-session', (req, res) => {
-    console.log('Cookies received on session check:', req.cookies); // Debugging log
     const token = req.cookies?.token;
 
     if (!token) {
@@ -64,7 +62,7 @@ router.post('/logout', (req, res) => {
     res.clearCookie('token', {
         httpOnly: true,
         sameSite: 'Lax',
-        secure: false // Set to true in production with HTTPS
+        secure: false 
     });
     console.log('User logged out, token cleared from cookies');
     res.json({ message: 'Logged out successfully' });

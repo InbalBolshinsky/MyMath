@@ -55,7 +55,6 @@ export const Exercise = () => {
             { withCredentials: true }
         );
         console.log('Session data saved:', response.data);
-        console.log('High Score received:', response.data.highScore);
     } catch (error) {
         console.error('Error saving session data:', error);
     }
@@ -112,16 +111,6 @@ export const Exercise = () => {
     setUserInputAnswer('');
   }
 
-  function calcSolution(first_num: number, second_num: number, activity: string) {
-    switch (activity) {
-      case '+': return first_num + second_num;
-      case '-': return first_num - second_num;
-      case 'x': return first_num * second_num;
-      case ':': return second_num !== 0 ? first_num / second_num : NaN;
-      default: return NaN;
-    }
-  }
-  
   const playSound = (soundFile: string) => {
     if (!isMuted) {  
       const audio = new Audio(soundFile);
@@ -183,7 +172,6 @@ const handleWrongAnswer = () => {
     setCorrectAnswers(0); 
     setIncorrectAnswers(0); 
 };
-
 
   return (
     <div className='exercise-container'>

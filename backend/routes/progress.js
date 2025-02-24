@@ -4,7 +4,6 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { checkAndUpdateTrophies } = require('./checkAndUpdateTrophies'); 
 
-// Middleware to verify the token from cookies
 const verifyToken = (req, res, next) => {
   const token = req.cookies?.token;
   if (!token) return res.status(401).json({ error: 'Unauthorized' });
@@ -16,7 +15,7 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// 📝 **Update Session and Achievements:**
+// Update Session and Achievements:
 router.post('/update-session', verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -34,11 +33,9 @@ router.post('/update-session', verifyToken, async (req, res) => {
 
     user.exerciseHistory.push(newSession);
     
-    // Calculate and update the high score
     const sessionScore = parseInt(newSession.score, 10) || 0;
     if (sessionScore > (user.highScore || 0)) {
         user.highScore = sessionScore;
-        console.log('New high score set:', user.highScore);
     }
 
     await user.save();
@@ -57,14 +54,10 @@ router.post('/update-session', verifyToken, async (req, res) => {
   }
 });
 
-
-// GET achievements and high score for the logged-in user
 router.get('/', verifyToken, async (req, res) => {
   try {
       const user = await User.findById(req.user.id);
       if (!user) return res.status(404).json({ error: 'User not found' });
-      
-      console.log('Fetched high score from database:', user.highScore);
 
       res.json({
           exerciseHistory: user.exerciseHistory || [],
@@ -75,6 +68,5 @@ router.get('/', verifyToken, async (req, res) => {
       res.status(500).json({ error: 'Server error' });
   }
 });
-
 
 module.exports = router;

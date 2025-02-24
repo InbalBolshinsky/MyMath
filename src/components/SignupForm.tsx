@@ -52,6 +52,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
         <form onSubmit={handleSubmit}>
           <h2 className="signup-header">Sign Up</h2>
           <input
+          className="input"
             type="text"
             placeholder="Username"
             value={userName}
@@ -59,6 +60,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
             required
           />
           <input
+            className="input"
             type="password"
             placeholder="Password"
             value={password}

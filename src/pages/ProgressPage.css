@@ -37,6 +37,7 @@ body {
   font-size: 24px;
   font-family: 'Chewy', cursive; 
   color: #9a36dd;
+  text-shadow: 2px 2px 5px #8459a19c;
 }
 
 .filter-select {

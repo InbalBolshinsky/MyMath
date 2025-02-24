@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -14,15 +13,15 @@ const PORT = process.env.PORT || 5000;
 
 // CORS Configuration
 app.use(cors({
-    origin: 'http://localhost:5173', // Your frontend origin
-    credentials: true, // Allow credentials (cookies) to be sent
+    origin: 'http://localhost:5173', 
+    credentials: true, 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cookieParser()); // Required to parse cookies
+app.use(cookieParser()); 
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

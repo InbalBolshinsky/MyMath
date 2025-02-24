@@ -103,14 +103,14 @@ const ProgressPage: React.FC = () => {
       </section>
 
       <section className="achievements-section">
-  <h3 className="section-title">🏆 Achievements</h3>
+  <h3 className="section-title">Achievements</h3>
   <div className="trophy-container">
     {allTrophies.map((trophyName, index) => {
       const isUnlocked = achievements.some(
         (achievement) => achievement.title === trophyName && achievement.unlocked
       );
 
-      console.log(`Trophy: ${trophyName} | Unlocked: ${isUnlocked}`); // Debugging output
+      console.log(`Trophy: ${trophyName} | Unlocked: ${isUnlocked}`); 
 
       const trophyStyle =
         trophyName === "MyMath Master: collected all trophies"

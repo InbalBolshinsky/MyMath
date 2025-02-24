@@ -1,4 +1,3 @@
-// src/components/LoginForm.tsx
 import React, { useState, useContext } from "react";
 import "./PopupForm.css";
 import { AuthContext } from "../context/AuthContext";
@@ -33,9 +32,9 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 
       if (response.ok) {
           if (auth?.setUser) {
-              auth.setUser(userName); // Update the AuthContext
+              auth.setUser(userName); 
           }
-          onSuccess(userName); // Notify Home.tsx of successful login
+          onSuccess(userName); 
           setErrorMessage("");
       } else {
           setErrorMessage(data.error || "Login failed.");
@@ -56,6 +55,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         <form onSubmit={handleSubmit}>
           <h2 className="login-header">Login</h2>
           <input
+            className="input"
             type="text"
             placeholder="Username"
             value={userName}
@@ -63,6 +63,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
             required
           />
           <input
+            className="input"
             type="password"
             placeholder="Password"
             value={password}

@@ -1,4 +1,3 @@
-// Home.tsx
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -72,14 +71,13 @@ export const Home = () => {
         To Progress Page
       </button>
 
-      {/* Login Form Popup */}
       {isLoginPopupOpen && (
         <div className='modal-overlay' onClick={() => setLoginPopupOpen(false)}>
           <div className='modal-content' onClick={(e) => e.stopPropagation()}>
             <LoginForm
               onSuccess={(username: string) => {
                 if (auth?.setUser) {
-                  auth.setUser(username); // Properly set user in AuthContext
+                  auth.setUser(username); 
                 }
                 setWelcomeMessage(`Welcome back, ${username}!`);
                 setLoginPopupOpen(false);
@@ -94,19 +92,20 @@ export const Home = () => {
         </div>
       )}
 
-      {/* Sign-Up Form Popup */}
       {isSignUpPopupOpen && (
         <div className='modal-overlay' onClick={() => setSignUpPopupOpen(false)}>
           <div className='modal-content' onClick={(e) => e.stopPropagation()}>
             <SignUpForm 
               onSuccess={() => setSignUpPopupOpen(false)} 
-              onBack={() => setSignUpPopupOpen(false)} 
+              onBack={() => { 
+                setSignUpPopupOpen(false);
+                setLoginPopupOpen(true); }
+              } 
             />
           </div>
         </div>
       )}
 
-      {/* Session Settings Form Popup */}
       {isSessionSettingsPopupOpen && (
         <div className='modal-overlay' onClick={() => setSessionSettingsPopupOpen(false)}>
           <div className='modal-content' onClick={(e) => e.stopPropagation()}>
@@ -119,7 +118,6 @@ export const Home = () => {
         </div>
       )}
 
-      {/* Error Message Popup */}
       {errorPopup && (
         <div className='modal-overlay' onClick={closeErrorPopup}>
           <div className='modal-content' onClick={(e) => e.stopPropagation()}>
