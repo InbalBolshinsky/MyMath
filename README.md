@@ -33,10 +33,6 @@ Fun animations and positive feedback for correct answers.
 
 #### - Database: MongoDB for persistent data storage.
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Contact
 
 For questions or suggestions, please open an issue or reach me at inbalbolsh@gmail.com.
